@@ -113,7 +113,7 @@
     top: -10px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1300px) {
     .projectCardBackground {
         position: relative;
         background-color: black;
@@ -125,13 +125,13 @@
     }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1300px) {
     .projectCardBackground {
         position: relative;
         background-color: black;
         flex-basis: 33.33%;
         color: white;
-        height: 30vw;
+        height: 25vw;
         width: 20vw;
     }
 }
@@ -173,7 +173,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 100;
-    font-size: 1.5vw;
+    font-size: 1vw;
     line-height: 1.5vw;
     padding: 2vw 2rem 0rem 2rem;
 }
@@ -216,7 +216,7 @@
 }
 
 .tag {
-    border: 2px solid white;
+    border: 1px solid white;
     border-radius: 20px;
     padding: 5px 20px 5px 20px;
     margin: 5px 10px 0px 0px;
@@ -229,7 +229,7 @@
 .tagName {
     font-family: Montserrat;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1vw;
     white-space: nowrap;
     text-transform: uppercase;

@@ -13,6 +13,40 @@
     overflow: hidden;
 }
 
+.pulse {
+    animation: pulse 1.5s infinite;
+    margin: 0 auto;
+    display: table;
+    margin-top: 50px;
+    animation-direction: alternate;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    50% {
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     .description {
         font-family: Montserrat;
@@ -65,7 +99,6 @@
     top: 20%;
     z-index: 5;
 }
-
 
 .boston {
     position: absolute;
@@ -271,8 +304,7 @@
     align-items: baseline;
     grid-template-columns: 10vw 10vw 10vw 5vw;
     justify-items: center;
-    grid-template-areas:
-        'k i-kim m'
+    grid-template-areas: 'k i-kim m';
 }
 
 .k-kim {

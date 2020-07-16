@@ -61,7 +61,7 @@ const projects = [
             'An iOS app created for students to help them prioritize their school work allowing them to accomplish all of their goals. ',
         position: 'UI & UX Designer',
         image: PrioritiImg,
-        tags: ['dev', 'UX / UI'],
+        tags: ['dev', 'UX / UI', 'Mobile'],
     },
     {
         num: '02',
@@ -70,7 +70,7 @@ const projects = [
             'An Airbnb hackathon mobile app used to create and share pictures and memories from tips and adventures. ',
         position: 'UI & UX Designer',
         image: PostcardImg,
-        tags: ['UX / UI'],
+        tags: ['UX / UI', 'Mobile'],
     },
     {
         num: '03',
@@ -79,7 +79,7 @@ const projects = [
             'A bill splitting app that easily helps you settle the bill and request money from friends based on what they ate ',
         position: 'UI & UX Designer',
         image: SplitImg,
-        tags: ['UX / UI'],
+        tags: ['UX / UI', 'Web'],
     },
     {
         num: '04',
@@ -101,7 +101,7 @@ const projects = [
     {
         num: '06',
         name: 'Design Book',
-        desc: 'Description about what you do idk something about the project make a good summary. ',
+        desc: 'A brochure to showcase the different arts that Northeastern offers.',
         position: 'UI & UX Designer',
         image: DesignbookImg,
         tags: ['design'],
@@ -119,15 +119,21 @@ function ProjectList(props) {
                 return '#E13328';
             }
             case 'UX / UI': {
-                return '#0E88DE';
+                return '#D2E128';
             }
             case 'photography': {
                 return 'green';
             }
             case 'design': {
-                return 'white';
+                return '#FFCAB1';
             }
-        }
+            case 'Mobile': {
+                return '#E128C4'
+            }
+            case 'Web': {
+                return '#0E88DE'
+            }
+            }
     };
 
     const projectTags = (tags) => {
@@ -177,10 +183,10 @@ function ProjectList(props) {
                                     <div className={'projectCardTitle'}> {project.name}</div>
                                     <div className={'projectCardDesc'}>{project.desc}</div>
                                     {projectTags(project.tags)}
-                                    <button className={'projectCardCaseButton'}>
+                                    {/* <button className={'projectCardCaseButton'}>
                                         {'View Cases'}
                                         <ButtonUnderline className={'projectCardCaseButtonUnderline'} />
-                                    </button>
+                                    </button> */}
                                 </div>
                             </div>
                         </div>

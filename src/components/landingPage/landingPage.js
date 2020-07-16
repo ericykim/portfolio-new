@@ -51,9 +51,9 @@ function LandingPage(props) {
     const scroll = () => {
         return (
             <div className={'scrollContainer'}>
-                <p className={'scroll'}> Scroll down</p>
-                <DownArrow className={'scroll'} />
-                <DownArrow className={'scroll'} />
+                <p className={'scroll pulse'}> Scroll down</p>
+                <DownArrow className={'scroll pulse'} />
+                <DownArrow className={'scroll pulse'} />
             </div>
         );
     };
