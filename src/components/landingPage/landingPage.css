@@ -1,0 +1,289 @@
+.blackSection {
+    background-color: black;
+    width: 100vw;
+    height: 300px;
+    position: absolute;
+    bottom: 0px;
+    z-index: 0;
+}
+
+.landingBackground {
+    height: 100vh;
+    background-color: white;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 1000px) {
+    .description {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.5vw;
+        letter-spacing: 0.06em;
+        color: #000000;
+        position: relative;
+        width: 30%;
+        height: 120px;
+        left: 20vw;
+        top: -10px;
+        z-index: 5;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .description {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.5vw;
+        letter-spacing: 0.06em;
+        color: #000000;
+        position: relative;
+        width: 30%;
+        height: 120px;
+        left: 20vw;
+        top: -10px;
+        z-index: 5;
+    }
+}
+
+.landingText {
+    position: absolute;
+    top: 150px;
+}
+
+.heading {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3vw;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 20vw;
+    top: 20%;
+    z-index: 5;
+}
+
+
+.boston {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    /* top: 0px; */
+    /* min-width: 100%; */
+    /* width: 60vw; */
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+}
+
+.blueOverlay {
+    position: absolute;
+    width: 60%;
+    height: 400px;
+    right: -10%;
+    bottom: 0px;
+    z-index: 3;
+
+    background: linear-gradient(115.23deg, #153145 22.09%, rgba(255, 255, 255, 0) 95.11%), #0e88de;
+    mix-blend-mode: multiply;
+    transform: rotate(-180deg);
+}
+
+.blueDots {
+    position: absolute;
+    /* width: 560px;
+    height: 560px; */
+    left: 40%;
+    /* right: 0%; */
+    top: 40%;
+}
+
+.options {
+    display: inline-block;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #000000;
+    /* color: #ffffff; */
+    padding: 8px 0px 8px 16px;
+    text-decoration: none;
+    /* color: rgba(0, 0, 0, 0.25); */
+    z-index: 5;
+}
+
+.options a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.menu {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    /* or 150% */
+    letter-spacing: 0.06em;
+    /* color: #000000; */
+    /* position: relative;
+	width: 100%;
+	height: 100%;
+	left: 30%;
+	top: 40%; */
+    position: absolute;
+    /* position: fixed; */
+    width: 26%;
+    height: 120px;
+    left: 5%;
+    bottom: 350px;
+    z-index: 5;
+}
+
+.scroll {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    text-transform: lowercase;
+    /* identical to box height, or 112% */
+
+    letter-spacing: 0.06em;
+    display: block;
+    margin: -25px auto 0px auto;
+}
+
+.scrollContainer {
+    text-align: center;
+    position: absolute;
+    /* width: 26%; */
+    height: 120px;
+    left: 20%;
+    bottom: 200px;
+    z-index: 5;
+}
+
+/* .nameCol {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 550px;
+    top: 0;
+    z-index: 5;
+} */
+
+/* .nameCol :last-child {
+    margin-top: 40px;
+} */
+
+.nameRow {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    /* width: 26%; */
+    /* height: 120px; */
+    /* right: 0px; */
+    top: 190px;
+    right: 20px;
+    z-index: 5;
+}
+
+.nameRow :first-child {
+    margin-right: 100px;
+    /* margin: -25px auto 0px auto; */
+}
+
+.letterCol {
+    width: 140px;
+}
+.letterRow {
+    height: 180px;
+}
+
+.lastName {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    /* width: 26%; */
+    /* height: 120px; */
+    /* right: 0px; */
+    bottom: 150px;
+    right: 0px;
+    z-index: 5;
+}
+
+.lastNameRow {
+    height: 180px;
+    margin-right: 80px;
+}
+
+.firstName {
+    position: absolute;
+    z-index: 5;
+    top: 0px;
+    right: 0px;
+    display: grid;
+    grid-gap: 20px;
+    align-items: center;
+    grid-template-columns: 10vw 10vw 10vw 10vw;
+    justify-items: center;
+    grid-template-areas:
+        'e . . .'
+        'r . i c';
+}
+
+.firstName img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.e-eric {
+    grid-area: e;
+    width: 100%;
+}
+
+.r-eric {
+    grid-area: r;
+    width: 100%;
+}
+.i-eric {
+    grid-area: i;
+    width: 40%;
+}
+.c-eric {
+    grid-area: c;
+    width: 100%;
+}
+
+.lastName {
+    position: absolute;
+    right: 0px;
+    z-index: 5;
+    display: grid;
+    grid-gap: 20px;
+    align-items: baseline;
+    grid-template-columns: 10vw 10vw 10vw 5vw;
+    justify-items: center;
+    grid-template-areas:
+        'k i-kim m'
+}
+
+.k-kim {
+    grid-area: k;
+    width: 100%;
+}
+.i-kim {
+    grid-area: i-kim;
+    width: 33%;
+}
+.m-kim {
+    grid-area: m;
+    width: 115%;
+}
