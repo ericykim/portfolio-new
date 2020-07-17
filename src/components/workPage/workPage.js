@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './workPage.css';
 import _ from 'lodash';
+import { Route, Link } from 'react-router-dom';
 
 import W from '../../images/work/W.png';
 import O from '../../images/work/O.png';
@@ -60,6 +61,7 @@ function WorkCarousel(props) {
             position: 'Software Engineer/ UI & UX Designer',
             image: Whoop,
             tags: ['dev', 'UX / UI'],
+            link: 'https://medium.com/@ericykim/overhauling-the-internal-tools-dashboard-d8403141b84f',
         },
         {
             num: '02',
@@ -67,6 +69,7 @@ function WorkCarousel(props) {
             position: 'Software Engineer/ QA Engineer',
             image: Avigilon,
             tags: ['dev'],
+            link: '/avigilon',
         },
         {
             num: '03',
@@ -74,6 +77,7 @@ function WorkCarousel(props) {
             position: 'UI & UX Designer',
             image: Fisherman,
             tags: ['UX / UI'],
+            link: 'https://medium.com/@ericykim/designing-a-customer-dashboard-be59b61dcac2',
         },
     ];
 
@@ -105,14 +109,10 @@ function WorkCarousel(props) {
             <div className={'workCardTags'}>
                 {_.map(tags, function (tag) {
                     return (
-                        // <div >
-                        //     <span className={`dot`} style={{ backgroundColor: `${getColor(tag)}` }} />
-                        //     <span className={'tagName'}>{tag}</span>
-                        // </div>
-                            <div className={'workTag'}>
-                                <span className={`dot`} style={{ backgroundColor: `${getColor(tag)}` }} />
-                                <span className={'workTagName'}>{tag}</span>
-                            </div>
+                        <div className={'workTag'}>
+                            <span className={`dot`} style={{ backgroundColor: `${getColor(tag)}` }} />
+                            <span className={'workTagName'}>{tag}</span>
+                        </div>
                     );
                 })}
             </div>
@@ -148,10 +148,20 @@ function WorkCarousel(props) {
                         <div className={'workPosition'}>{work.position}</div>
                         <div className={'workName'}>{work.name}</div>
 
-                        <button className={'workViewButton'}>
+                        <a
+                            target='_blank'
+                            href={work.link}
+                            style={{
+                                color: 'white',
+                                display: 'flex',
+                                width: 'fit-content',
+                                alignItems: 'center',
+                                flexDirection: 'column',
+                            }}
+                            className={'workViewButton'}>
                             {'View Cases'}
                             <ButtonUnderline className={'workButtonUnderline'} />
-                        </button>
+                        </a>
 
                         {works.map((value, index) => {
                             if (workNum === index) {
