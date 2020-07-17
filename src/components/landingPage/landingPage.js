@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { ReactComponent as BlueDots } from '../../assets/blue_dots.svg';
 import Logo from '../../images/smallLogo.png';
 import { ReactComponent as ActiveMenu } from '../../assets/activeMenu.svg';
@@ -17,7 +18,7 @@ import './landingPage.css';
 
 import { HashLink as Link } from 'react-router-hash-link';
 
-const desc = `a web developer with an eye for design aiming to build tools that unlock a persons performance and productivity `
+const desc = `a web developer with an eye for design aiming to build tools that unlock a persons performance and productivity `;
 
 function Menu(props) {
     const { className } = props;
@@ -25,7 +26,7 @@ function Menu(props) {
         { name: 'Work', to: '/#work' },
         { name: 'Projects', to: '/#projects' },
         { name: 'Contact', to: '/#contact' },
-        { name: 'Resume', to: '/resume' },
+        { name: 'Resume', to: 'Eric_Kim_Resume.pdf' },
     ];
     return (
         <div className={className}>
@@ -33,12 +34,18 @@ function Menu(props) {
                 return (
                     <div>
                         {/* add conditonal based on active with "activemenu" */}
-                        {/* <ActiveMenu /> */}
-                        <NonActiveMenu />
+                        <ActiveMenu />
+                        {/* <NonActiveMenu /> */}
                         <div className={'options'}>
-                            <Link to={option.to} smooth>
-                                {option.name}
-                            </Link>
+                            {_.get(option, 'to') === 'Eric_Kim_Resume.pdf' ? (
+                                <a className={'strikethrough'} href={option.to} target='_blank' download smooth>
+                                    {option.name}
+                                </a>
+                            ) : (
+                                <Link className={'strikethrough'} to={option.to} smooth>
+                                    {option.name}
+                                </Link>
+                            )}
                         </div>
                     </div>
                 );

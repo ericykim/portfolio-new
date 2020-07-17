@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './workPage.css';
+import _ from 'lodash';
 
 import W from '../../images/work/W.png';
 import O from '../../images/work/O.png';
@@ -46,11 +47,11 @@ function WorkCarousel(props) {
             if (workNum === works.length - 1) {
                 setWorkNum(0);
             } else {
-                setWorkNum(workNum + 1)
+                setWorkNum(workNum + 1);
             }
-          }, 4000);
-          return () => clearTimeout(scrollInterval);
-    },);
+        }, 4000);
+        return () => clearTimeout(scrollInterval);
+    });
 
     const works = [
         {
@@ -58,23 +59,65 @@ function WorkCarousel(props) {
             name: 'Whoop',
             position: 'Software Engineer/ UI & UX Designer',
             image: Whoop,
-            // tags: [dev, UX / UI],
+            tags: ['dev', 'UX / UI'],
         },
         {
             num: '02',
             name: 'Avigilon',
             position: 'Software Engineer/ QA Engineer',
             image: Avigilon,
-            // tags: [dev, UX / UI],
+            tags: ['dev'],
         },
         {
             num: '03',
             name: 'Fisherman',
             position: 'UI & UX Designer',
             image: Fisherman,
-            // tags: [dev, UX / UI],
+            tags: ['UX / UI'],
         },
     ];
+
+    const getColor = (tag) => {
+        switch (tag) {
+            case 'dev': {
+                return '#E13328';
+            }
+            case 'UX / UI': {
+                return '#D2E128';
+            }
+            case 'photography': {
+                return 'green';
+            }
+            case 'design': {
+                return '#FFCAB1';
+            }
+            case 'Mobile': {
+                return '#E128C4';
+            }
+            case 'Web': {
+                return '#0E88DE';
+            }
+        }
+    };
+
+    const projectTags = (tags) => {
+        return (
+            <div className={'workCardTags'}>
+                {_.map(tags, function (tag) {
+                    return (
+                        // <div >
+                        //     <span className={`dot`} style={{ backgroundColor: `${getColor(tag)}` }} />
+                        //     <span className={'tagName'}>{tag}</span>
+                        // </div>
+                            <div className={'workTag'}>
+                                <span className={`dot`} style={{ backgroundColor: `${getColor(tag)}` }} />
+                                <span className={'workTagName'}>{tag}</span>
+                            </div>
+                    );
+                })}
+            </div>
+        );
+    };
 
     const changeWork = (pos) => {
         if (pos === 'add') {
@@ -95,10 +138,11 @@ function WorkCarousel(props) {
 
     const work = works[workNum];
     return (
-        <div className={'workContainer'} >
+        <div className={'workContainer'}>
             <div className={'workCarousel'}>
                 <div className={'imageOverlay'}>
                     <div className={'workNumber'}>{work.num}</div>
+                    {projectTags(work.tags)}
                     <img src={work.image} alt={'whoop'} className={'workImage'} style={{ width: '50vw' }} />
                     <div className={'workDescription'}>
                         <div className={'workPosition'}>{work.position}</div>

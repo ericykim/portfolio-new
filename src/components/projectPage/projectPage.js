@@ -62,6 +62,7 @@ const projects = [
         position: 'UI & UX Designer',
         image: PrioritiImg,
         tags: ['dev', 'UX / UI', 'Mobile'],
+        link: 'https://github.com/ericykim/Prioriti',
     },
     {
         num: '02',
@@ -71,6 +72,7 @@ const projects = [
         position: 'UI & UX Designer',
         image: PostcardImg,
         tags: ['UX / UI', 'Mobile'],
+        link: 'https://xd.adobe.com/view/341ee82a-4a7c-46a8-8fda-868ea1d5e0f6-614d/?fullscreen'
     },
     {
         num: '03',
@@ -80,23 +82,26 @@ const projects = [
         position: 'UI & UX Designer',
         image: SplitImg,
         tags: ['UX / UI', 'Web'],
+        link: 'https://drive.google.com/file/d/1grc9_GtOAKcR5gIcBDWXnFlLPrqb1OHi/view?usp=sharing',
     },
     {
         num: '04',
         name: 'Animatr',
-        desc: 'A Java application that helps users create simple but effective 2D animations from shapes and export them as svgs',
+        desc:
+            'A Java application that helps users create simple but effective 2D animations from shapes and export them as svgs',
         position: 'Software Engineer/ UI & UX Designer',
         image: AnimatrImg,
         tags: ['dev'],
-        link: '/animatr',
+        link: 'https://github.com/ericykim/Animator',
     },
     {
         num: '05',
-        name: 'Quiktix',
+        name: 'Qwiktix',
         desc: 'A Java application that mimics aspects of Fandango with a mock SQL database. ',
         position: 'Software Engineer/ QA Engineer',
         image: QuiktixImg,
         tags: ['dev'],
+        link: 'https://github.com/ericykim/QwikTix',
     },
     {
         num: '06',
@@ -105,6 +110,7 @@ const projects = [
         position: 'UI & UX Designer',
         image: DesignbookImg,
         tags: ['design'],
+        link: '/animatr'
     },
 ];
 
@@ -128,12 +134,12 @@ function ProjectList(props) {
                 return '#FFCAB1';
             }
             case 'Mobile': {
-                return '#E128C4'
+                return '#E128C4';
             }
             case 'Web': {
-                return '#0E88DE'
+                return '#0E88DE';
             }
-            }
+        }
     };
 
     const projectTags = (tags) => {
@@ -166,7 +172,7 @@ function ProjectList(props) {
                 // let hover = _.isEqual('01', project.num);
                 let hover = _.isEqual(hoverCard, project.num);
                 return (
-                    <Link to={`${project.link}`} style={{ textDecoration: 'none' }}>
+                    <a target='_blank' href={project.link} style={{ textDecoration: 'none' }}>
                         <div
                             className={hover ? 'projectCardHover' : 'projectCard'}
                             onMouseEnter={() => setHoverState(project.num)}
@@ -190,7 +196,7 @@ function ProjectList(props) {
                                 </div>
                             </div>
                         </div>
-                    </Link>
+                    </a>
                 );
             })}
         </div>

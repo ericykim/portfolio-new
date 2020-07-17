@@ -6,9 +6,26 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 900;
-    font-size: 125px;
-    line-height: 152px;
+    font-size: 5rem;
 
     display: flex;
-    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subText {
+    background-color: black;
+
+    color: white;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 30px;
+
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
 }

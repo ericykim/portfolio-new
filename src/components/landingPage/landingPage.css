@@ -89,7 +89,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
-    font-size: 3vw;
+    font-size: 2vw;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     position: relative;
@@ -318,4 +318,42 @@
 .m-kim {
     grid-area: m;
     width: 115%;
+}
+
+.strikethrough {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.strikethrough:before,
+.strikethrough:after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    top: 50%;
+    margin-top: -2.5px;
+    background: #fff;
+}
+
+.strikethrough:before {
+    left: -2.5px;
+}
+.strikethrough:after {
+    right: 2.5px;
+    background: black;
+    transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.strikethrough:hover:before {
+    background: black;
+    width: 100%;
+    transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.strikethrough:hover:after {
+    background: transparent;
+    width: 100%;
+    transition: 0s;
 }

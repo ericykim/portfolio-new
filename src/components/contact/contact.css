@@ -23,7 +23,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 200;
-    font-size: 3vw;
+    font-size: 2vw;
     color: white;
 }
 
@@ -31,7 +31,7 @@
     display: flex !important;
     flex-direction: row;
     justify-content: space-between;
-    width: 40%;
+    width: 30%;
     padding: 0vw 15vw 0vw 15vw;
 }
 
@@ -41,7 +41,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 400;
-    font-size: 3vw;
+    font-size: 2vw;
     padding-bottom: 1vw;
     color: white;
 }
