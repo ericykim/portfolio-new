@@ -87,7 +87,7 @@ function LandingPage(props) {
                     <img src={M} alt={'M'} className={'m-kim'} />
                 </div>
                 <BlueDots className={'blueDots'} />
-                <img className={'boston'} src={BostonPng} alt={'boston'} />
+                {/* <img className={'boston'} src={BostonPng} alt={'boston'} /> */}
                 {/* <Boston className={'boston'} /> */}
                 <div className={'blueOverlay'}></div>
             </div>
