@@ -13,6 +13,19 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path='/'>
+                    <div className="constructionPage">
+                        Welcome to Eric Kim's Portfolio
+                        <div className="constructionPageSubtext">
+                            Pardon the appearance, I'm currently rebranding
+                        </div>
+                        <div>🚧 🎨 🧱 🚧</div>
+
+                        <Link className={'strikethrough'} to={'/home'}>
+                            View the old site
+                        </Link>
+                    </div>
+                </Route>
+                <Route path='/home'>
                     <div>
                         <LandingPage />
                         <WorkPage />
@@ -20,12 +33,12 @@ function App() {
                         <Contact />
                     </div>
                 </Route>
-                <Route
+                {/* <Route
                     path='/:project'
                     render={() => {
                         return <Animatr />;
                     }}
-                />
+                /> */}
             </Switch>
         </Router>
     );
