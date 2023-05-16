@@ -1,9 +1,7 @@
 import { createClient } from '@/prismicio'
-import { PrismicLink, PrismicText, SliceComponentProps } from '@prismicio/react'
-import { Content } from '@prismicio/client'
+import { PrismicLink, PrismicText, PrismicRichText } from '@prismicio/react'
 import styles from './navigation.module.scss'
 
-export type NavigationSlicesType = SliceComponentProps<Content.NavigationDocumentDataSlicesSlice>
 async function Navigation() {
     const client = createClient()
     const navigation = await client.getByUID('navigation', 'eric-kim')
@@ -14,7 +12,7 @@ async function Navigation() {
                     return (
                         <div key={slice.id}>
                             <PrismicLink field={slice.primary.link}>
-                                <PrismicText field={slice.primary.name} />
+                                <PrismicRichText field={slice.primary.name} />
                             </PrismicLink>
                             {slice.items.length > 0 && (
                                 <div>

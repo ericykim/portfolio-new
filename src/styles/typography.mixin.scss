@@ -1,0 +1,113 @@
+@function pow($number, $exponent) {
+    $value: 1rem;
+
+    @if $exponent > 0 {
+        @for $i from 1 through $exponent {
+            $value: $value * $number;
+        }
+    }
+
+    @return $value;
+}
+
+@mixin defaultTypeStyle {
+    &.font-normal {
+        font-family: var(--font-family-normal);
+    }
+    &.font-bold {
+        font-family: var(--font-family-bold);
+    }
+    &.font-semibold {
+        font-family: var(--font-family-semibold);
+    }
+    &.uppercase {
+        text-transform: uppercase;
+    }
+    &.transform-none {
+        text-transform: none;
+    }
+}
+
+@mixin defaultHeadingStyle {
+    @include defaultTypeStyle;
+    font-weight: 600;
+    text-transform: none;
+    margin: 0;
+    font-family: var(--font-family-normal);
+    line-height: 1.2em;
+    letter-spacing: -0.005em;
+}
+
+@mixin defaultBodyStyle {
+    @include defaultTypeStyle;
+    text-transform: none;
+    margin: 0;
+    font-family: var(--font-family-normal);
+    font-weight: normal;
+    line-height: 1.2em;
+    letter-spacing: -0.005em;
+}
+
+// Based on a 1.125 rem ratio
+// the pow function shows the relationship to the ratio
+$font-size-ratio: 1.125;
+
+$p5: 1rem;
+$p4: $font-size-ratio * 1rem;
+$p3: pow($font-size-ratio, 2);
+$p2: pow($font-size-ratio, 3);
+$p1: pow($font-size-ratio, 4);
+
+$h6: $p1;
+$h5: pow($font-size-ratio, 5);
+$h4: pow($font-size-ratio, 6);
+$h3: pow($font-size-ratio, 7);
+$h2: pow($font-size-ratio, 8);
+$h1: pow($font-size-ratio, 9);
+
+@mixin p1 {
+    @include defaultBodyStyle;
+    font-size: $p1;
+}
+@mixin p2 {
+    @include defaultBodyStyle;
+    font-size: $p2;
+}
+@mixin p3 {
+    @include defaultBodyStyle;
+    font-size: $p3;
+}
+@mixin p4 {
+    @include defaultBodyStyle;
+    font-size: $p4;
+}
+@mixin p5 {
+    @include defaultBodyStyle;
+    font-size: $p5;
+}
+
+@mixin h1 {
+    @include defaultHeadingStyle;
+    font-size: $h1;
+}
+@mixin h2 {
+    @include defaultHeadingStyle;
+    font-size: $h2;
+}
+@mixin h3 {
+    @include defaultHeadingStyle;
+    font-size: $h3;
+}
+@mixin h4 {
+    @include defaultHeadingStyle;
+    font-size: $h4;
+}
+@mixin h5 {
+    @include defaultHeadingStyle;
+    font-size: $h5;
+}
+@mixin h6 {
+    @include defaultHeadingStyle;
+    font-size: $h6;
+}
+
