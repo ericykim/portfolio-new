@@ -18,7 +18,7 @@ function App() {
                         <div className="constructionPageSubtext">
                             Pardon the appearance, I'm currently rebranding
                         </div>
-                        <div>🚧 🎨 🧱 🚧</div>
+                        <div className="emoji">🚧 🎨 🧱 🚧</div>
 
                         <Link className={'strikethrough'} to={'/home'}>
                             View the old site
