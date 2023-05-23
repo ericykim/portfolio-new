@@ -11,17 +11,23 @@
 }
 
 @mixin defaultTypeStyle {
+    &.font-light {
+        font-family: var(--font-family-light);
+    }
+    &.font-medium {
+        font-family: var(--font-family-medium);
+    }
     &.font-normal {
         font-family: var(--font-family-normal);
     }
     &.font-bold {
         font-family: var(--font-family-bold);
     }
-    &.font-semibold {
-        font-family: var(--font-family-semibold);
-    }
     &.uppercase {
         text-transform: uppercase;
+    }
+    &.lowercase {
+        text-transform: lowercase;
     }
     &.transform-none {
         text-transform: none;
@@ -30,17 +36,13 @@
 
 @mixin defaultHeadingStyle {
     @include defaultTypeStyle;
-    font-weight: 600;
-    text-transform: none;
     margin: 0;
     font-family: var(--font-family-normal);
     line-height: 1.2em;
-    letter-spacing: -0.005em;
 }
 
 @mixin defaultBodyStyle {
     @include defaultTypeStyle;
-    text-transform: none;
     margin: 0;
     font-family: var(--font-family-normal);
     font-weight: normal;

@@ -1,29 +1,27 @@
 import { createClient } from '@/prismicio'
 import { PrismicLink, PrismicText, PrismicRichText } from '@prismicio/react'
+import Link from 'next/link'
 import styles from './navigation.module.scss'
+import NavSectionHeading from './navSectionHeading/navSectionHeading'
+import NavSectionButton from './navSectionButton/navSectionButton'
+import { client } from '@/utils/prismic'
 
 async function Navigation() {
-    const client = createClient()
-    const navigation = await client.getByUID('navigation', 'eric-kim')
+    const navigation = await client.getByUID('navigation', 'menu-items')
     return (
         <nav className={styles.navigationContainer}>
+            <div className={styles.nameHeading}>
+                <h3 className='font-normal'>Eric Kim</h3>
+            </div>
             <div>
                 {navigation.data.slices.map((slice) => {
                     return (
                         <div key={slice.id}>
-                            <PrismicLink field={slice.primary.link}>
-                                <PrismicRichText field={slice.primary.name} />
-                            </PrismicLink>
+                            <NavSectionHeading slice={slice} />
                             {slice.items.length > 0 && (
                                 <div>
                                     {slice.items.map((item) => {
-                                        return (
-                                            <div key={JSON.stringify(item)}>
-                                                <PrismicLink field={item.child_link}>
-                                                    <PrismicText field={item.child_name} />
-                                                </PrismicLink>
-                                            </div>
-                                        )
+                                        return <NavSectionButton item={item} />
                                     })}
                                 </div>
                             )}

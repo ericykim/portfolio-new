@@ -30,6 +30,6 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "prismicio-types.d.ts"
-    ],
+, "src/components/navigation/navSectionButton/navSectionButton.tsx"    ],
     "exclude": ["node_modules"]
 }

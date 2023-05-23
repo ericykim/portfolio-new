@@ -51,7 +51,59 @@ export type NavigationDocument<Lang extends string = string> =
     "navigation",
     Lang
   >;
-export type AllDocumentTypes = NavigationDocument;
+/** Content for Page documents */
+interface PageDocumentData {
+  /**
+   * date field in *Page*
+   *
+   * - **Field Type**: Timestamp
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/timestamp
+   *
+   */
+  date: prismicT.TimestampField;
+  /**
+   * Title field in *Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  title: prismicT.RichTextField;
+  /**
+   * Slice Zone field in *Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+   *
+   */
+  slices: prismicT.SliceZone<PageDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *Page → Slice Zone*
+ *
+ */
+type PageDocumentDataSlicesSlice = TextBlockSlice;
+/**
+ * Page document from Prismic
+ *
+ * - **API ID**: `page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PageDocument<Lang extends string = string> =
+  prismicT.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+export type AllDocumentTypes = NavigationDocument | PageDocument;
 /**
  * Primary content in NavigationItem → Primary
  *
@@ -77,6 +129,16 @@ interface NavigiationItemSliceDefaultPrimary {
    *
    */
   link: prismicT.LinkField;
+  /**
+   * icon field in *NavigationItem → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigiation_item.primary.icon
+   * - **Documentation**: https://prismic.io/docs/core-concepts/image
+   *
+   */
+  icon: prismicT.ImageField<never>;
 }
 /**
  * Item in NavigationItem → Items
@@ -103,6 +165,16 @@ export interface NavigiationItemSliceDefaultItem {
    *
    */
   child_link: prismicT.LinkField;
+  /**
+   * icon field in *NavigationItem → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigiation_item.items[].icon
+   * - **Documentation**: https://prismic.io/docs/core-concepts/image
+   *
+   */
+  icon: prismicT.ImageField<never>;
 }
 /**
  * Default variation for NavigationItem Slice
@@ -134,6 +206,68 @@ export type NavigiationItemSlice = prismicT.SharedSlice<
   "navigiation_item",
   NavigiationItemSliceVariation
 >;
+/**
+ * Primary content in TextBlock → Primary
+ *
+ */
+interface TextBlockSliceDefaultPrimary {
+  /**
+   * title field in *TextBlock → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_block.primary.title
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  title: prismicT.RichTextField;
+}
+/**
+ * Item in TextBlock → Items
+ *
+ */
+export interface TextBlockSliceDefaultItem {
+  /**
+   * content field in *TextBlock → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_block.items[].content
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  content: prismicT.RichTextField;
+}
+/**
+ * Default variation for TextBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `Default`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type TextBlockSliceDefault = prismicT.SharedSliceVariation<
+  "default",
+  Simplify<TextBlockSliceDefaultPrimary>,
+  Simplify<TextBlockSliceDefaultItem>
+>;
+/**
+ * Slice variation for *TextBlock*
+ *
+ */
+type TextBlockSliceVariation = TextBlockSliceDefault;
+/**
+ * TextBlock Shared Slice
+ *
+ * - **API ID**: `text_block`
+ * - **Description**: `TextBlock`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type TextBlockSlice = prismicT.SharedSlice<
+  "text_block",
+  TextBlockSliceVariation
+>;
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -146,12 +280,20 @@ declare module "@prismicio/client" {
       NavigationDocumentData,
       NavigationDocumentDataSlicesSlice,
       NavigationDocument,
+      PageDocumentData,
+      PageDocumentDataSlicesSlice,
+      PageDocument,
       AllDocumentTypes,
       NavigiationItemSliceDefaultPrimary,
       NavigiationItemSliceDefaultItem,
       NavigiationItemSliceDefault,
       NavigiationItemSliceVariation,
       NavigiationItemSlice,
+      TextBlockSliceDefaultPrimary,
+      TextBlockSliceDefaultItem,
+      TextBlockSliceDefault,
+      TextBlockSliceVariation,
+      TextBlockSlice,
     };
   }
 }

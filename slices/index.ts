@@ -4,4 +4,5 @@ import dynamic from "next/dynamic";
 
 export const components = {
   navigiation_item: dynamic(() => import("./NavigationItem")),
+  text_block: dynamic(() => import("./TextBlock")),
 };
