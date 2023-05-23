@@ -6,11 +6,12 @@ import { classes } from '@/utils'
 import Link from 'next/link'
 
 type NavSubSectionProps = {
+    key: string,
     item: NavigiationItemSliceDefaultItem
 }
-function NavSectionButton({ item }: NavSubSectionProps) {
+function NavSectionButton({ item, key }: NavSubSectionProps) {
     return (
-        <div className={styles.buttonContainer} key={JSON.stringify(item)}>
+        <div className={styles.buttonContainer} key={key}>
             <PrismicLink
                 field={item.child_link}
                 externalComponent={(props) => (

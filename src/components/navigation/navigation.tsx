@@ -21,7 +21,7 @@ async function Navigation() {
                             {slice.items.length > 0 && (
                                 <div>
                                     {slice.items.map((item) => {
-                                        return <NavSectionButton item={item} />
+                                        return <NavSectionButton key={JSON.stringify(item)} item={item} />
                                     })}
                                 </div>
                             )}
