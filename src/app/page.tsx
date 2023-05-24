@@ -5,6 +5,7 @@ import { Col, Row } from '@/layout'
 import { client } from '@/utils/prismic'
 import { PrismicRichText } from '@prismicio/react'
 import { TextBlockSlice } from '../../prismicio-types'
+import TextBlock from '@/components/textBlock/textBlock'
 
 export default async function Home({ params }: any) {
     const content = await client.getByUID('page', 'home')
@@ -13,26 +14,11 @@ export default async function Home({ params }: any) {
 
     return (
         <Row center={'xs'}>
-            <Col xs={12}>
-                {content.data.slices.map((slice: TextBlockSlice) => {
-                    return (
-                        <div key={slice.id}>
-                            <PrismicRichText field={slice.primary.title} />
-                            {slice.items.length > 0 && (
-                                <div>
-                                    {slice.items.map((item) => {
-                                        return (
-                                            <div>
-                                                <PrismicRichText field={item.content} />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )}
-                        </div>
-                    )
-                })}
-            </Col>
+            {content.data.slices.map((slice: TextBlockSlice) => {
+                return (
+                    <TextBlock key={JSON.stringify(slice)} slice={slice}/>
+                )
+            })}
         </Row>
     )
 }
