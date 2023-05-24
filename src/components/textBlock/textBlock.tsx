@@ -1,5 +1,6 @@
 import { Col, Row } from '@/layout'
-import { PrismicRichText } from '@prismicio/react'
+import { classes } from '@/utils';
+import { PrismicRichText, PrismicText } from '@prismicio/react'
 import { TextBlockSlice } from '../../../prismicio-types';
 import styles from './textBlock.module.scss'
 
@@ -11,7 +12,9 @@ function TextBlock({slice}: TextBlockProps) {
     return (
         <>
             <Col xs={4} className={styles.titleContainer}>
-                <PrismicRichText field={slice.primary.title} />
+                <p className={classes('p5', 'lowercase')}>
+                <PrismicText field={slice.primary.title} />
+                </p>
             </Col>
             <Col xs={8}>
                 {slice.items.length > 0 && (
