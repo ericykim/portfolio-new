@@ -18,7 +18,7 @@ function ListBlock({ slice }: ListBlockProps) {
                     <PrismicText field={slice.primary.title} />
                 </p>
             </Col>
-            <Col xs={8} xsOffset={2} className={styles.list}>
+            <Col md={10} lg={8} lgOffset={2} className={styles.list}>
                 {slice.items.length > 0 &&
                     slice.items.map((item) => {
                         console.log(item.link)
