@@ -14,7 +14,7 @@ function NavSectionButton({ item, key }: NavSubSectionProps) {
         <div className={styles.buttonContainer} key={key}>
             <PrismicNextLink className={classes('external', styles.link)} field={item.child_link}>
                 <PrismicNextImage className={styles.icon} field={item.icon} alt={''} />
-                <p className={'p3'}>
+                <p className={classes('p3', styles.text)}>
                     <PrismicText field={item.child_name} />
                 </p>
             </PrismicNextLink>

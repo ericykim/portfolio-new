@@ -1,7 +1,13 @@
+@import 'src/layout/responsive.mixin.scss';
+
 .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 4px 8px;
     margin: 4px 0px;
     border-radius: 4px;
+    height: 25px;
 
     .icon {
         fill: gray;
@@ -10,6 +16,12 @@
 
         height: 15px;
         width: auto;
+    }
+
+    .text {
+        @include less-than-md {
+            display: none;
+        }
     }
 
     .link {

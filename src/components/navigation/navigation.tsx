@@ -7,6 +7,7 @@ import NavSectionButton from './navSectionButton/navSectionButton'
 import { client } from '@/utils/prismic'
 import { NavigiationItemSlice } from '../../../prismicio-types'
 import { RichTextField, RTNode } from '@prismicio/types'
+import { classes } from '@/utils'
 
 interface TextSlice {
     type: string
@@ -17,7 +18,7 @@ async function Navigation() {
     return (
         <nav className={styles.navigationContainer}>
             <div className={styles.nameHeading}>
-                <h3 className='font-normal'>Eric Kim</h3>
+                <h3 className={classes('font-normal', styles.text)}>Eric Kim</h3>
             </div>
             <div>
                 {navigation.data.slices.map((slice: NavigiationItemSlice) => {
