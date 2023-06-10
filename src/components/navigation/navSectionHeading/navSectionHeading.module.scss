@@ -1,0 +1,15 @@
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 12px 8px 8px 8px;
+    pointer-events: none;
+
+    color: gray;
+    text-decoration: none; /* no underline */
+    cursor: pointer;
+
+    .headingStyle {
+        color: gray;
+        text-transform: lowercase;
+    }
+}

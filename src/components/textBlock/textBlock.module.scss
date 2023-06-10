@@ -1,0 +1,22 @@
+.container {
+    margin-top: 52px;
+
+    .titleContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        .title {
+            color: gray;
+            text-transform: lowercase;
+            white-space: nowrap;
+        }
+    }
+
+    .contentContainer {
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: flex-start;
+        text-align: left;
+    }
+}

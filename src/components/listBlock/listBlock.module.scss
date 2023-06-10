@@ -1,0 +1,38 @@
+.container {
+    margin-top: 52px;
+    .titleContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        .title {
+            color: gray;
+            text-transform: lowercase;
+            white-space: nowrap;
+        }
+    }
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .contentContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 16px;
+
+        color: inherit;
+        text-decoration: none; /* no underline */
+
+        .dashedLine {
+            flex: 1;
+            border-top: 1px dashed gray;
+            height: 1px;
+        }
+    }
+}
+

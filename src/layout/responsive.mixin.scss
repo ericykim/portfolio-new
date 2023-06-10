@@ -1,0 +1,87 @@
+$gutter-width: 24px;
+$outer-margin: 48px;
+$half-gutter-width: calc(#{$gutter-width} * 0.5);
+$gutter-compensation: calc((#{$gutter-width} * 0.5) * -1);
+$columns: 12;
+// container width
+
+// breakpoint
+$xs-min: 0rem;
+$sm-min: 20rem;
+$md-min: 37.5rem;
+$lg-min: 60rem;
+$xl-min: 71.25rem;
+$viewport: 'xl', 'lg', 'md', 'sm', 'xs';
+
+:export {
+  xs: 0rem;
+  sm: 20rem;
+  md: 37.5rem;
+  lg: 60rem;
+  xl: 71.25rem;
+}
+
+@mixin greater-than-lg {
+  @media only screen and (min-width: calc(#{$lg-min} + 1px)) {
+    @content;
+  }
+}
+@mixin greater-than-md {
+  @media only screen and (min-width: calc(#{$md-min} + 1px)) {
+    @content;
+  }
+}
+
+@mixin greater-than-sm {
+  @media only screen and (min-width: calc(#{$sm-min} + 1px)) {
+    @content;
+  }
+}
+
+@mixin less-than-xl {
+  @media only screen and (max-width: calc(#{$xl-min} - 1px)) {
+    @content;
+  }
+}
+
+@mixin less-than-lg {
+  @media only screen and (max-width: calc(#{$lg-min} - 1px)) {
+    @content;
+  }
+}
+@mixin less-than-md {
+  @media only screen and (max-width: calc(#{$md-min} - 1px)) {
+    @content;
+  }
+}
+@mixin less-than-sm {
+  @media only screen and (max-width: calc(#{$sm-min} - 1px)) {
+    @content;
+  }
+}
+
+@mixin for-xl-only {
+  @media only screen and (min-width: $xl-min) {
+    @content;
+  }
+}
+@mixin for-lg-only {
+  @media only screen and (min-width: $lg-min) and (max-width: calc(#{$xl-min} - 1px)) {
+    @content;
+  }
+}
+@mixin for-md-only {
+  @media only screen and (min-width: $md-min) and (max-width: calc(#{$lg-min} - 1px)) {
+    @content;
+  }
+}
+@mixin for-sm-only {
+  @media only screen and (min-width: calc(#{$sm-min} + 1px)) and (max-width: calc(#{$md-min} - 1px)) {
+    @content;
+  }
+}
+@mixin for-xs-only {
+  @media only screen and (max-width: $sm-min) {
+    @content;
+  }
+}

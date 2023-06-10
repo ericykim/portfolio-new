@@ -1,0 +1,35 @@
+.buttonContainer {
+    padding: 4px 8px;
+    margin: 4px 0px;
+    border-radius: 4px;
+
+    .icon {
+        fill: gray;
+        color: gray;
+        margin-right: 12px;
+
+        height: 15px;
+        width: auto;
+    }
+
+    .link {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        color: inherit;
+        text-decoration: none; /* no underline */
+    }
+
+    // https://codepen.io/sosuke/pen/Pjoqqp
+}
+
+.buttonContainer:hover {
+    background-color: black;
+    color: white;
+
+    & > .link > .icon {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(137deg) brightness(105%)
+            contrast(101%);
+    }
+}

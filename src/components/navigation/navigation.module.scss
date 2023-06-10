@@ -1,0 +1,15 @@
+.navigationContainer {
+    height: 100%;
+    width: 200px;
+    background-color: var(--color-background);
+
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    .nameHeading {
+        padding-left: 8px;
+        height: 92px;
+    }
+}
