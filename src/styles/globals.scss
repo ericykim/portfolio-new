@@ -21,6 +21,10 @@
     src: url('/src/app/PPAgrandir-Variable.ttf') format('truetype');
 }
 
+p {
+    margin: 0;
+}
+
 html {
     --font-family-light: 'PPAgrandir-light', Helvetica, Arial, sans-serif;
     --font-family-normal: 'PPAgrandir-regular', Helvetica, Arial, sans-serif;

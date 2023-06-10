@@ -1,24 +1,24 @@
 import { Col, Row } from '@/layout'
-import { classes } from '@/utils';
+import { classes } from '@/utils'
 import { PrismicRichText, PrismicText } from '@prismicio/react'
-import { TextBlockSlice } from '../../../prismicio-types';
+import { TextBlockSlice } from '../../../prismicio-types'
 import styles from './textBlock.module.scss'
 
 type TextBlockProps = {
-    slice: TextBlockSlice;
+    slice: TextBlockSlice
 }
 
-function TextBlock({slice}: TextBlockProps) {
+function TextBlock({ slice }: TextBlockProps) {
     return (
-        <>
-            <Col xs={4} className={styles.titleContainer}>
-                <p className={classes('p5', 'lowercase')}>
-                <PrismicText field={slice.primary.title} />
+        <Row className={styles.container}>
+            <Col xs={2} className={styles.titleContainer}>
+                <p className={classes('p5', styles.title)}>
+                    <PrismicText field={slice.primary.title} />
                 </p>
             </Col>
-            <Col xs={8}>
+            <Col xs={8} xsOffset={2}>
                 {slice.items.length > 0 && (
-                    <div>
+                    <div className={styles.contentContainer}>
                         {slice.items.map((item) => {
                             return (
                                 <div key={JSON.stringify(item)}>
@@ -29,7 +29,7 @@ function TextBlock({slice}: TextBlockProps) {
                     </div>
                 )}
             </Col>
-        </>
+        </Row>
     )
 }
 

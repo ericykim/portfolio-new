@@ -3,13 +3,14 @@ import { PrismicLink, PrismicText } from '@prismicio/react'
 import Link from 'next/link'
 import { NavigiationItemSlice } from '../../../../prismicio-types'
 import styles from './navSectionHeading.module.scss'
+import * as prismicHelpers from '@prismicio/helpers'
 
 type NavSectionHeadingProps = {
     slice: NavigiationItemSlice
 }
 
 function NavSectionHeading({ slice }: NavSectionHeadingProps) {
-    if (!slice.primary.name[0].text) {
+    if (!prismicHelpers.asText(slice.primary.name)) {
         return <></>
     }
 

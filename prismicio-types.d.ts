@@ -91,7 +91,7 @@ interface PageDocumentData {
  * Slice for *Page → Slice Zone*
  *
  */
-type PageDocumentDataSlicesSlice = TextBlockSlice;
+type PageDocumentDataSlicesSlice = TextBlockSlice | ListBlockSlice;
 /**
  * Page document from Prismic
  *
@@ -104,6 +104,98 @@ type PageDocumentDataSlicesSlice = TextBlockSlice;
 export type PageDocument<Lang extends string = string> =
   prismicT.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 export type AllDocumentTypes = NavigationDocument | PageDocument;
+/**
+ * Primary content in ListBlock → Primary
+ *
+ */
+interface ListBlockSliceDefaultPrimary {
+  /**
+   * title field in *ListBlock → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list_block.primary.title
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  title: prismicT.RichTextField;
+}
+/**
+ * Item in ListBlock → Items
+ *
+ */
+export interface ListBlockSliceDefaultItem {
+  /**
+   * title field in *ListBlock → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list_block.items[].title
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  title: prismicT.RichTextField;
+  /**
+   * date field in *ListBlock → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list_block.items[].date
+   * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+   *
+   */
+  date: prismicT.KeyTextField;
+  /**
+   * subtext field in *ListBlock → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list_block.items[].subtext
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  subtext: prismicT.RichTextField;
+  /**
+   * link field in *ListBlock → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list_block.items[].link
+   * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+   *
+   */
+  link: prismicT.LinkField;
+}
+/**
+ * Default variation for ListBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `Default`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type ListBlockSliceDefault = prismicT.SharedSliceVariation<
+  "default",
+  Simplify<ListBlockSliceDefaultPrimary>,
+  Simplify<ListBlockSliceDefaultItem>
+>;
+/**
+ * Slice variation for *ListBlock*
+ *
+ */
+type ListBlockSliceVariation = ListBlockSliceDefault;
+/**
+ * ListBlock Shared Slice
+ *
+ * - **API ID**: `list_block`
+ * - **Description**: `ListBlock`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type ListBlockSlice = prismicT.SharedSlice<
+  "list_block",
+  ListBlockSliceVariation
+>;
 /**
  * Primary content in NavigationItem → Primary
  *
@@ -284,6 +376,11 @@ declare module "@prismicio/client" {
       PageDocumentDataSlicesSlice,
       PageDocument,
       AllDocumentTypes,
+      ListBlockSliceDefaultPrimary,
+      ListBlockSliceDefaultItem,
+      ListBlockSliceDefault,
+      ListBlockSliceVariation,
+      ListBlockSlice,
       NavigiationItemSliceDefaultPrimary,
       NavigiationItemSliceDefaultItem,
       NavigiationItemSliceDefault,
