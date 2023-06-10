@@ -10,7 +10,6 @@ type ListBlockProps = {
 }
 
 function ListBlock({ slice }: ListBlockProps) {
-    // console.log('slice', slice.items)
     return (
         <Row className={styles.container}>
             <Col xs={2} className={styles.titleContainer}>
@@ -21,7 +20,6 @@ function ListBlock({ slice }: ListBlockProps) {
             <Col md={10} lg={8} lgOffset={2} className={styles.list}>
                 {slice.items.length > 0 &&
                     slice.items.map((item) => {
-                        console.log(item.link)
                         return (
                             <PrismicNextLink
                                 className={styles.contentContainer}
