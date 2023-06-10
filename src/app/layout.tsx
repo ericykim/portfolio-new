@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {/* @ts-expect-error Async Server Component */}
                 <Navigation />
                 <main>
-                    <Container className={styles.homePageContainer} fluid >{children}</Container>
+                    <Container debug className={styles.homePageContainer} fluid >{children}</Container>
                 </main>
             </body>
         </html>
