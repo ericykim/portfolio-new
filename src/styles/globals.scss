@@ -1,39 +1,11 @@
 @import '@/styles/typography.mixin.scss';
 
-@font-face {
-    font-family: PPAgrandir-light;
-    font-weight: 250;
-    src: url('/src/app/PPAgrandir-Variable.ttf') format('truetype');
-}
-@font-face {
-    font-family: PPAgrandir-regular;
-    font-weight: 400;
-    src: url('/src/app/PPAgrandir-Variable.ttf') format('truetype');
-}
-@font-face {
-    font-family: PPAgrandir-bold;
-    font-weight: 700;
-    src: url('/src/app/PPAgrandir-Variable.ttf') format('truetype');
-}
-@font-face {
-    font-family: PPAgrandir-heavy;
-    font-weight: 900;
-    src: url('/src/app/PPAgrandir-Variable.ttf') format('truetype');
-}
-
 p {
     margin: 0;
 }
 
 html {
-    --font-family-light: 'PPAgrandir-light', Helvetica, Arial, sans-serif;
-    --font-family-normal: 'PPAgrandir-regular', Helvetica, Arial, sans-serif;
-    --font-family-medium: 'PPAgrandir-bold', Helvetica, Arial, sans-serif;
-    --font-family-bold: 'PPAgrandir-heavy', Helvetica, Arial, sans-serif;
-    // --font-family-light: 'PPWoodland-ultralight', Helvetica, Arial, sans-serif;
-    // --font-family-normal: 'PPWoodland-regular', Helvetica, Arial, sans-serif;
-    // --font-family-medium: 'PPWoodland-bold', Helvetica, Arial, sans-serif;
-    // --font-family-bold: 'PPWoodland-heavy', Helvetica, Arial, sans-serif;
+    --font-family: 'PPAgrandir', Helvetica, Arial, sans-serif;
 
     --color-background: rgb(250, 250, 250);
 }
@@ -57,23 +29,26 @@ main {
 
 @mixin defaultTypeStyle {
     &.font-light {
-        font-family: var(--font-family-light);
+        font-family: var(--font-family);
         font-weight: 250;
     }
     &.font-medium {
-        font-family: var(--font-family-medium);
+        font-family: var(--font-family);
         font-weight: 700;
     }
     &.font-normal {
-        font-family: var(--font-family-normal);
+        font-family: var(--font-family);
         font-weight: 400;
     }
     &.font-bold {
-        font-family: var(--font-family-bold);
+        font-family: var(--font-family);
         font-weight: 900;
     }
     &.uppercase {
         text-transform: uppercase;
+    }
+    &.lowercase {
+        text-transform: lowercase;
     }
     &.transform-none {
         text-transform: none;

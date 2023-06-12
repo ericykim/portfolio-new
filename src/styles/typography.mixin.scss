@@ -12,16 +12,20 @@
 
 @mixin defaultTypeStyle {
     &.font-light {
-        font-family: var(--font-family-light);
+        font-family: var(--font-family);
+        font-weight: 250;
     }
     &.font-medium {
-        font-family: var(--font-family-medium);
+        font-family: var(--font-family);
+        font-weight: 700;
     }
     &.font-normal {
-        font-family: var(--font-family-normal);
+        font-family: var(--font-family);
+        font-weight: 400;
     }
     &.font-bold {
-        font-family: var(--font-family-bold);
+        font-family: var(--font-family);
+        font-weight: 900;
     }
     &.uppercase {
         text-transform: uppercase;
@@ -37,14 +41,14 @@
 @mixin defaultHeadingStyle {
     @include defaultTypeStyle;
     margin: 0;
-    font-family: var(--font-family-normal);
+    font-family: var(--font-family);
     line-height: 1.2em;
 }
 
 @mixin defaultBodyStyle {
     @include defaultTypeStyle;
     margin: 0;
-    font-family: var(--font-family-normal);
+    font-family: var(--font-family);
     font-weight: normal;
     line-height: 1.2em;
     letter-spacing: -0.005em;
