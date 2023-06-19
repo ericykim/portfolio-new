@@ -18,11 +18,6 @@ const myFontVariable = localFont({
     variable: '--font-family'
  });
 
-// --font-family: 'PPAgrandir-light', Helvetica, Arial, sans-serif;
-//     --font-family: 'PPAgrandir-regular', Helvetica, Arial, sans-serif;
-//     --font-family: 'PPAgrandir-bold', Helvetica, Arial, sans-serif;
-//     --font-family:
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang='en' className={classes(myFontVariable.variable, myFont.className)}>
@@ -30,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {/* @ts-expect-error Async Server Component */}
                 <Navigation />
                 <main>
-                    <Container className={styles.homePageContainer} fluid >{children}</Container>
+                    <Container debug className={styles.homePageContainer} fluid >{children}</Container>
                 </main>
             </body>
         </html>

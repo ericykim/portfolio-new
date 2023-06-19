@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  image_block: dynamic(() => import("./ImageBlock")),
   list_block: dynamic(() => import("./ListBlock")),
   navigiation_item: dynamic(() => import("./NavigationItem")),
   text_block: dynamic(() => import("./TextBlock")),

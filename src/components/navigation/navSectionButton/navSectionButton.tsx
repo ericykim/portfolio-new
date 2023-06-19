@@ -6,19 +6,21 @@ import { classes } from '@/utils'
 import Link from 'next/link'
 
 type NavSubSectionProps = {
-    key: string,
+    key: string
     item: NavigiationItemSliceDefaultItem
 }
 function NavSectionButton({ item, key }: NavSubSectionProps) {
     return (
-        <div className={styles.buttonContainer} key={key}>
-            <PrismicNextLink className={classes('external', styles.link)} field={item.child_link}>
-                <PrismicNextImage className={styles.icon} field={item.icon} alt={''} />
-                <p className={classes('p3', styles.text)}>
-                    <PrismicText field={item.child_name} />
-                </p>
-            </PrismicNextLink>
-        </div>
+        <PrismicNextLink
+            key={key}
+            className={classes('external', styles.link)}
+            field={item.child_link}
+        >
+            <PrismicNextImage className={styles.icon} field={item.icon} alt={''} />
+            <p className={classes('p3', styles.text)}>
+                <PrismicText field={item.child_name} />
+            </p>
+        </PrismicNextLink>
     )
 }
 

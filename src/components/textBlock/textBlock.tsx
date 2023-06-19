@@ -16,12 +16,12 @@ function TextBlock({ slice }: TextBlockProps) {
                     <PrismicText field={slice.primary.title} />
                 </p>
             </Col>
-            <Col xs={10} md={10} lg={8} lgOffset={2}>
+            <Col xs={10} md={10} lg={8} xsOffset={0} lgOffset={2}>
                 {slice.items.length > 0 && (
                     <div className={styles.contentContainer}>
                         {slice.items.map((item) => {
                             return (
-                                <div key={JSON.stringify(item)}>
+                                <div key={JSON.stringify(item)} style={{lineHeight: '1.5em'}}>
                                     <PrismicRichText field={item.content} />
                                 </div>
                             )

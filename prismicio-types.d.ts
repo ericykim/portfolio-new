@@ -6,6 +6,65 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = {
   [KeyType in keyof T]: T[KeyType];
 };
+/** Content for BlogPost documents */
+interface BlogpostDocumentData {
+  /**
+   * Title field in *BlogPost*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  title: prismicT.RichTextField;
+  /**
+   * created_on field in *BlogPost*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.created_on
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/date
+   *
+   */
+  created_on: prismicT.DateField;
+  /**
+   * Slice Zone field in *BlogPost*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blogpost.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+   *
+   */
+  slices: prismicT.SliceZone<BlogpostDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *BlogPost → Slice Zone*
+ *
+ */
+type BlogpostDocumentDataSlicesSlice =
+  | ImageBlockSlice
+  | TextBlockSlice
+  | ListBlockSlice;
+/**
+ * BlogPost document from Prismic
+ *
+ * - **API ID**: `blogpost`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type BlogpostDocument<Lang extends string = string> =
+  prismicT.PrismicDocumentWithUID<
+    Simplify<BlogpostDocumentData>,
+    "blogpost",
+    Lang
+  >;
 /** Content for Navigation documents */
 interface NavigationDocumentData {
   /**
@@ -91,7 +150,10 @@ interface PageDocumentData {
  * Slice for *Page → Slice Zone*
  *
  */
-type PageDocumentDataSlicesSlice = TextBlockSlice | ListBlockSlice;
+type PageDocumentDataSlicesSlice =
+  | TextBlockSlice
+  | ListBlockSlice
+  | ImageBlockSlice;
 /**
  * Page document from Prismic
  *
@@ -103,7 +165,66 @@ type PageDocumentDataSlicesSlice = TextBlockSlice | ListBlockSlice;
  */
 export type PageDocument<Lang extends string = string> =
   prismicT.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
-export type AllDocumentTypes = NavigationDocument | PageDocument;
+export type AllDocumentTypes =
+  | BlogpostDocument
+  | NavigationDocument
+  | PageDocument;
+/**
+ * Primary content in ImageBlock → Primary
+ *
+ */
+interface ImageBlockSliceDefaultPrimary {
+  /**
+   * image field in *ImageBlock → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_block.primary.image
+   * - **Documentation**: https://prismic.io/docs/core-concepts/image
+   *
+   */
+  image: prismicT.ImageField<never>;
+  /**
+   * caption field in *ImageBlock → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_block.primary.caption
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  caption: prismicT.RichTextField;
+}
+/**
+ * Default variation for ImageBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `Default`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type ImageBlockSliceDefault = prismicT.SharedSliceVariation<
+  "default",
+  Simplify<ImageBlockSliceDefaultPrimary>,
+  never
+>;
+/**
+ * Slice variation for *ImageBlock*
+ *
+ */
+type ImageBlockSliceVariation = ImageBlockSliceDefault;
+/**
+ * ImageBlock Shared Slice
+ *
+ * - **API ID**: `image_block`
+ * - **Description**: `ImageBlock`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type ImageBlockSlice = prismicT.SharedSlice<
+  "image_block",
+  ImageBlockSliceVariation
+>;
 /**
  * Primary content in ListBlock → Primary
  *
@@ -369,6 +490,9 @@ declare module "@prismicio/client" {
   }
   namespace Content {
     export type {
+      BlogpostDocumentData,
+      BlogpostDocumentDataSlicesSlice,
+      BlogpostDocument,
       NavigationDocumentData,
       NavigationDocumentDataSlicesSlice,
       NavigationDocument,
@@ -376,6 +500,10 @@ declare module "@prismicio/client" {
       PageDocumentDataSlicesSlice,
       PageDocument,
       AllDocumentTypes,
+      ImageBlockSliceDefaultPrimary,
+      ImageBlockSliceDefault,
+      ImageBlockSliceVariation,
+      ImageBlockSlice,
       ListBlockSliceDefaultPrimary,
       ListBlockSliceDefaultItem,
       ListBlockSliceDefault,

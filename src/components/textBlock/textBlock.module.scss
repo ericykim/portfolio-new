@@ -9,14 +9,11 @@
         .title {
             color: gray;
             text-transform: lowercase;
-            white-space: nowrap;
+            white-space: pre-wrap;
         }
     }
 
     .contentContainer {
-        // display: flex;
-        // flex-direction: row;
-        // justify-content: flex-start;
         text-align: left;
     }
 }
