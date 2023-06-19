@@ -9,7 +9,6 @@ export default async function Home({ params }: any) {
     return (
         <>
             {content.data.slices.map((slice) => {
-                console.log(slice)
                 if (slice.slice_type === 'text_block') {
                     return <TextBlock key={JSON.stringify(slice)} slice={slice} />
                 }
