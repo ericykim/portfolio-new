@@ -8,18 +8,16 @@ import { usePathname } from 'next/navigation'
 import * as prismicHelpers from '@prismicio/helpers'
 
 type NavSubSectionProps = {
-    key: string
     item: NavigiationItemSliceDefaultItem
     setOpen: (isOpen: boolean) => void
 }
-function NavSectionButton({ item, key, setOpen}: NavSubSectionProps) {
+function NavSectionButton({ item, setOpen}: NavSubSectionProps) {
     const path = usePathname()
     const menuPath = path.split('/')[1]
 
     return (
         <PrismicNextLink
-        onClick={() => setOpen(false)}
-            key={key}
+            onClick={() => setOpen(false)}
             className={classes(
                 styles.link,
                 (menuPath === prismicHelpers.asText(item.child_name) ||
