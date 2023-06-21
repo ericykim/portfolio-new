@@ -29,8 +29,8 @@ function ListBlock({ slice }: ListBlockProps) {
                                 <PrismicText field={item.title} />
                                 <div className={styles.dashedLine} />
                                 <div>
-                                    {item.date}
                                     <PrismicText field={item.subtext} />
+                                    <span className={styles.date}>{item.date}</span>
                                 </div>
                             </PrismicNextLink>
                         )

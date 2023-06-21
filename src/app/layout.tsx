@@ -2,9 +2,10 @@ import '@/styles/globals.scss'
 import Navigation from '@/components/navigation/navigation'
 import ReactDOM from 'react-dom'
 import { Container } from '@/layout'
-import localFont from 'next/font/local';
+import localFont from 'next/font/local'
 import styles from './homePage.module.scss'
-import { classes } from '@/utils';
+import { classes } from '@/utils'
+import { client } from '@/utils/prismic'
 
 export const metadata = {
     title: 'Eric Kim',
@@ -12,21 +13,19 @@ export const metadata = {
 }
 const myFont = localFont({
     src: '/PPAgrandir-Variable.ttf',
- });
+})
 const myFontVariable = localFont({
     src: '/PPAgrandir-Variable.ttf',
-    variable: '--font-family'
- });
+    variable: '--font-family',
+})
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang='en' className={classes(myFontVariable.variable, myFont.className)}>
             <body>
                 {/* @ts-expect-error Async Server Component */}
-                <Navigation />
-                <main>
-                    <Container debug className={styles.homePageContainer} fluid >{children}</Container>
-                </main>
+                <Navigation/>
+                <main>{children}</main>
             </body>
         </html>
     )

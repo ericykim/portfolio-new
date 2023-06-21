@@ -3,6 +3,18 @@
 .container {
     margin-top: 52px;
 
+    .titleContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        .title {
+            color: gray;
+            text-transform: lowercase;
+            white-space: pre-wrap;
+        }
+    }
+
     .col {
         display: flex;
         flex-direction: column;
@@ -35,7 +47,7 @@
             width: 80%;
 
             @include less-than-md {
-                max-width: 100%;
+                width: 100%;
             }
         }
     }

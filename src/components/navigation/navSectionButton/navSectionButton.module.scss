@@ -1,5 +1,15 @@
 @import 'src/layout/responsive.mixin.scss';
 
+.activeLink {
+    background-color: black;
+    color: white !important;
+
+    & > .icon {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(137deg) brightness(105%)
+            contrast(101%);
+    }
+}
+
 .link {
     display: flex;
     flex-direction: row;
@@ -20,20 +30,9 @@
         height: 15px;
         width: auto;
     }
-
-    .text {
-        @include less-than-md {
-            display: none;
-        }
-    }
 }
 
-.link:hover {
-    background-color: black;
-    color: white;
-
-    & > .icon {
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(137deg) brightness(105%)
-            contrast(101%);
-    }
+.link:hover:not(.activeLink) {
+    background-color: var(--hover-gray);
+    color: black;
 }

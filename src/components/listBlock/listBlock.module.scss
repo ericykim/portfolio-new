@@ -6,7 +6,7 @@
         justify-content: flex-end;
 
         .title {
-            color: gray;
+            color: var(--text-gray);
             text-transform: lowercase;
             white-space: nowrap;
         }
@@ -30,8 +30,13 @@
 
         .dashedLine {
             flex: 1;
-            border-top: 1px dashed gray;
+            border-top: 1px dashed var(--text-gray);
             height: 1px;
+        }
+
+        .date {
+            padding-left: 12px;
+            color: var(--text-gray);
         }
     }
 }

@@ -4,7 +4,6 @@
 		"variation": "default",
 		"primary": {
 			"image": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1607582278038-6bebbd4d7b72",
@@ -22,6 +21,9 @@
 					},
 					"background": "transparent"
 				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
 			"caption": {
@@ -31,6 +33,17 @@
 						"type": "paragraph",
 						"content": {
 							"text": "Lorem consectetur ullamco pariatur aute sint id aliquip fugiat. Eiusmod non nostrud in non."
+						}
+					}
+				]
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Veniam Lorem Lorem fugiat cupidatat. Eu consequat nostrud laboris elit cupidatat ex culpa tempor esse exercitation do sint consequat et excepteur. Non reprehenderit dolore sit ullamco."
 						}
 					}
 				]
