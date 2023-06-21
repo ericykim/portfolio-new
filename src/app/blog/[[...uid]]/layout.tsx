@@ -22,7 +22,7 @@ export default async function Layout({ children, params }: RootLayoutProps) {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
-                    }
+                    } as const
                     return (
                         <Link
                             scroll={false}
