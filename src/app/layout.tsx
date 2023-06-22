@@ -5,7 +5,6 @@ import { Container } from '@/layout'
 import localFont from 'next/font/local'
 import styles from './homePage.module.scss'
 import { classes } from '@/utils'
-import { client } from '@/utils/prismic'
 
 export const metadata = {
     title: 'Eric Kim',
