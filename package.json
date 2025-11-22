@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "web": "turbo run dev --filter=@portfolio/web",
+    "studio": "turbo run dev --filter=@portfolio/studio",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=@portfolio/web",
+    "deploy:studio": "cd apps/studio && bun run deploy",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "latest"
+  },
+  "packageManager": "bun@1.0.0",
+  "engines": {
+    "node": ">=18"
+  }
+}
