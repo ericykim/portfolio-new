@@ -1,15 +1,62 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const ppTelegraf = localFont({
+  src: [
+    {
+      path: "../public/font/PPTelegraf-UltraLight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPTelegraf-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPTelegraf-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPTelegraf-UltraBold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPTelegraf-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-pp-telegraf",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const ppWoodland = localFont({
+  src: [
+    {
+      path: "../public/font/PPWoodland-Ultralight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPWoodland-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPWoodland-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/font/PPWoodland-Heavy.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-pp-woodland",
 });
 
 export const metadata: Metadata = {
@@ -24,11 +71,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${ppTelegraf.variable} ${ppWoodland.variable} antialiased`}>{children}</body>
     </html>
   );
 }
