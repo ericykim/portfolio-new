@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function FontDemo() {
   return (
-    <div className="min-h-screen p-8 md:p-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <div className="max-w-7xl mx-auto space-y-20">
+    <div className="p-8 md:p-12">
+      <div className="space-y-20">
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-6xl md:text-8xl font-[900] tracking-tight">
@@ -16,7 +16,7 @@ export default function FontDemo() {
 
         {/* Side by Side Comparison */}
         <section className="space-y-12">
-          <h2 className="text-4xl text-center">Side by Side Comparison</h2>
+          <h3 className="text-4xl text-center">Side by Side Comparison</h3>
 
           {/* UltraLight - 200 */}
           <div className="grid md:grid-cols-2 gap-8">
