@@ -15,6 +15,9 @@ import {
   Sun,
   Moon,
   Hammer,
+  Linkedin,
+  Github,
+  Code,
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -219,22 +222,55 @@ export function CollapsibleSidebar() {
             </div>
           </nav>
 
-          {/* Theme Toggle */}
-          <div className="mt-auto pt-3 border-t border-neutral-200 dark:border-neutral-800">
+          {/* Theme Toggle and Social Links */}
+          <div className="mt-auto pt-3 flex items-center gap-2">
             <Button
               onClick={toggleTheme}
               variant="light"
-              className="flex items-center gap-2.5 px-2 py-1.5 w-full justify-start"
-              startContent={
-                theme === "light" ? (
-                  <Moon className="w-[18px] h-[18px]" strokeWidth={2} />
-                ) : (
-                  <Sun className="w-[18px] h-[18px]" strokeWidth={2} />
-                )
+              isIconOnly
+              className="flex-shrink-0"
+              aria-label={
+                theme === "light"
+                  ? "Switch to dark mode"
+                  : "Switch to light mode"
               }
             >
-              {theme === "light" ? "Dark Mode" : "Light Mode"}
+              {theme === "light" ? (
+                <Moon className="w-[18px] h-[18px]" strokeWidth={2} />
+              ) : (
+                <Sun className="w-[18px] h-[18px]" strokeWidth={2} />
+              )}
             </Button>
+
+            <div className="h-6 w-px bg-neutral-200 dark:bg-neutral-800" />
+
+            <div className="flex items-center gap-2">
+              <Button
+                as="a"
+                href="https://www.linkedin.com/in/erickimdev"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="light"
+                isIconOnly
+                className="flex-shrink-0"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-[18px] h-[18px]" strokeWidth={2} />
+              </Button>
+
+              <Button
+                as="a"
+                href="https://github.com/ericykim"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="light"
+                isIconOnly
+                className="flex-shrink-0"
+                aria-label="GitHub"
+              >
+                <Github className="w-[18px] h-[18px]" strokeWidth={2} />
+              </Button>
+            </div>
           </div>
         </div>
       </aside>

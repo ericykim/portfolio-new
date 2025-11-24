@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "@/styles/globals.css";
-import { CollapsibleSidebar } from "@/components/CollapsibleSidebar";
-import { PageHeader } from "@/components/PageHeader";
+import { CollapsibleSidebar } from "@/components/nav/CollapsibleSidebar";
+import { PageHeader } from "@/components/nav/PageHeader";
 import { ppTelegraf, ppWoodland } from "@/styles/typography";
 import { Providers } from "@/components/Providers";
 
