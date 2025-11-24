@@ -19,7 +19,7 @@ const routeNames: Record<string, string> = {
 
 export function PageHeader() {
   const pathname = usePathname();
-  const { toggle } = useSidebar();
+  const { toggle, isOpen } = useSidebar();
 
   // Get the page name from the route map
   // For slug pages, use the parent route
@@ -35,20 +35,20 @@ export function PageHeader() {
   }
 
   return (
-    <div
-      className="sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 flex flex-row items-center justify-start gap-2 min-h-[30px] sm:min-h-[60px] px-2 sm:px-6"
-    >
-      <Button
-        isIconOnly
-        aria-label="Toggle menu"
-        color="default"
-        variant="light"
-        size="md"
-        onClick={toggle}
-        className="text-neutral-900 dark:text-neutral-100"
-      >
-        <Menu className="w-5 h-5" />
-      </Button>
+    <div className="sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 flex flex-row items-center justify-start gap-2 min-h-[30px] sm:min-h-[60px] px-2 sm:px-6">
+      {!isOpen && (
+        <Button
+          isIconOnly
+          aria-label="Open menu"
+          color="default"
+          variant="light"
+          size="md"
+          onClick={toggle}
+          className="text-neutral-900 dark:text-neutral-100"
+        >
+          <Menu className="w-[18px] h-[18px]" />
+        </Button>
+      )}
       <h1 className="text-xl font-semibold leading-none h-[15px]">
         {pageName}
       </h1>

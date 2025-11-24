@@ -9,12 +9,12 @@ import {
   Headphones,
   Footprints,
   BookOpen,
-  ChevronLeft,
   Sun,
   Moon,
   Hammer,
   Linkedin,
   Github,
+  ChevronsLeft,
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -83,13 +83,15 @@ export function CollapsibleSidebar() {
               </span>
             </div>
 
-            <button
+            <Button
               onClick={toggle}
-              className="flex p-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors flex-shrink-0"
-              aria-label="Collapse sidebar"
+              variant="light"
+              isIconOnly
+              className="flex-shrink-0"
+              aria-label="Close sidebar"
             >
-              <ChevronLeft className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
-            </button>
+              <ChevronsLeft className="w-[18px] h-[18px]" strokeWidth={2} />
+            </Button>
           </div>
 
           {/* Navigation */}
