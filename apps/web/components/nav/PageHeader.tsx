@@ -35,7 +35,9 @@ export function PageHeader() {
   }
 
   return (
-    <div className="min-h-[60px] sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 px-6 flex flex-row items-center justify-start items-center gap-2">
+    <div
+      className="sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 flex flex-row items-center justify-start gap-2 min-h-[30px] sm:min-h-[60px] px-2 sm:px-6"
+    >
       <Button
         isIconOnly
         aria-label="Toggle menu"

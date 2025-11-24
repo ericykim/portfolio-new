@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from "react";
 
 interface SidebarContextType {
   isOpen: boolean;
@@ -17,30 +17,14 @@ const SidebarContext = createContext<SidebarContextType>({
 export const useSidebar = () => useContext(SidebarContext);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Store sidebar state in localStorage
-  useEffect(() => {
-    const stored = localStorage.getItem('sidebar-open');
-    if (stored !== null) {
-      setIsOpen(stored === 'true');
-    } else {
-      // Default: open on desktop, closed on mobile
-      setIsOpen(window.innerWidth >= 768);
-    }
-  }, []);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggle = () => {
-    setIsOpen((prev) => {
-      const newValue = !prev;
-      localStorage.setItem('sidebar-open', String(newValue));
-      return newValue;
-    });
+    setIsOpen((prev) => !prev);
   };
 
   const close = () => {
     setIsOpen(false);
-    localStorage.setItem('sidebar-open', 'false');
   };
 
   return (
@@ -49,4 +33,3 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     </SidebarContext.Provider>
   );
 }
-

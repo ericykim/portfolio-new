@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import {
   Home,
   FileText,
@@ -11,17 +10,15 @@ import {
   Footprints,
   BookOpen,
   ChevronLeft,
-  ChevronRight,
   Sun,
   Moon,
   Hammer,
   Linkedin,
   Github,
-  Code,
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Button } from "@heroui/react";
+import { Button, cn } from "@heroui/react";
 
 interface NavItem {
   href: string;
@@ -47,53 +44,38 @@ export function CollapsibleSidebar() {
   const pathname = usePathname();
   const { isOpen, toggle, close } = useSidebar();
   const { theme, toggleTheme } = useTheme();
-  const [backdropReady, setBackdropReady] = useState(false);
-
-  // Close sidebar when route changes on mobile
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
-      close();
-    }
-  }, [pathname, close]);
-
-  // Delay backdrop interactivity to prevent immediate close on mobile
-  useEffect(() => {
-    if (isOpen) {
-      // Small delay before backdrop becomes clickable
-      const timer = setTimeout(() => setBackdropReady(true), 100);
-      return () => {
-        clearTimeout(timer);
-        setBackdropReady(false);
-      };
-    }
-    return () => setBackdropReady(false);
-  }, [isOpen]);
 
   return (
     <>
       {/* Backdrop overlay on mobile only */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
-          onClick={backdropReady ? close : undefined}
-          style={{ pointerEvents: backdropReady ? "auto" : "none" }}
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm sm:hidden"
+          onClick={close}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`
-          fixed md:relative top-0 left-0 bottom-0 z-50 md:z-0
+        className={cn(
+          `
+          fixed sm:relative z-50 sm:z-0
           transition-all duration-200 ease-in-out
-          bg-white dark:bg-neutral-950
-          border-r border-neutral-200 dark:border-neutral-800
-          ${isOpen ? "w-56" : "w-0 md:w-0"}
+          bg-neutral-100 dark:bg-neutral-900
           overflow-hidden
-        `}
+          
+          sm:top-0 sm:left-0 sm:bottom-0
+          
+          top-4 left-4 bottom-4
+          rounded-2xl sm:rounded-none
+          shadow-xl sm:shadow-none
+        `,
+          isOpen ? "w-56" : "w-0"
+        )}
       >
-        <div className="flex flex-col h-full w-56 p-3">
+        <div className="flex flex-col h-full sm:h-dvh w-56 p-0 sm:p-4">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6 px-2 py-2">
+          <div className="flex items-center justify-between min-h-[60px] px-4">
             <div className="flex items-center gap-2.5">
               <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0" />
               <span className="font-semibold text-sm whitespace-nowrap">
@@ -111,7 +93,7 @@ export function CollapsibleSidebar() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-0.5 overflow-y-auto">
+          <nav className="flex-1 space-y-0.5 overflow-y-auto p-3">
             {/* Main Navigation */}
             {mainNavItems.map((item) => {
               const Icon = item.icon;
@@ -223,7 +205,7 @@ export function CollapsibleSidebar() {
           </nav>
 
           {/* Theme Toggle and Social Links */}
-          <div className="mt-auto pt-3 flex items-center gap-2">
+          <div className="mt-auto pt-3 pb-3 px-3 flex items-center gap-2">
             <Button
               onClick={toggleTheme}
               variant="light"
