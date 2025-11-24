@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import {
   Home,
   FileText,
-  Briefcase,
   Camera,
   Headphones,
   Footprints,
@@ -19,6 +18,7 @@ import {
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
+import { Button } from "@heroui/react";
 
 interface NavItem {
   href: string;
@@ -221,49 +221,23 @@ export function CollapsibleSidebar() {
 
           {/* Theme Toggle */}
           <div className="mt-auto pt-3 border-t border-neutral-200 dark:border-neutral-800">
-            <button
+            <Button
               onClick={toggleTheme}
-              className="flex items-center gap-2.5 px-2 py-1.5 rounded-md w-full
-                text-sm font-medium whitespace-nowrap
-                transition-colors duration-150 ease-in-out
-                text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 hover:text-neutral-900 dark:hover:text-neutral-100"
-              aria-label="Toggle theme"
+              variant="light"
+              className="flex items-center gap-2.5 px-2 py-1.5 w-full justify-start"
+              startContent={
+                theme === "light" ? (
+                  <Moon className="w-[18px] h-[18px]" strokeWidth={2} />
+                ) : (
+                  <Sun className="w-[18px] h-[18px]" strokeWidth={2} />
+                )
+              }
             >
-              {theme === "light" ? (
-                <>
-                  <Moon
-                    className="w-[18px] h-[18px] flex-shrink-0"
-                    strokeWidth={2}
-                  />
-                  <span>Dark Mode</span>
-                </>
-              ) : (
-                <>
-                  <Sun
-                    className="w-[18px] h-[18px] flex-shrink-0"
-                    strokeWidth={2}
-                  />
-                  <span>Light Mode</span>
-                </>
-              )}
-            </button>
+              {theme === "light" ? "Dark Mode" : "Light Mode"}
+            </Button>
           </div>
         </div>
       </aside>
-
-      {/* Expand button when closed */}
-      {!isOpen && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            toggle();
-          }}
-          className="fixed top-4 left-4 z-[60] p-2 rounded-md bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors shadow-sm md:shadow-md"
-          aria-label="Expand sidebar"
-        >
-          <ChevronRight className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
-        </button>
-      )}
     </>
   );
 }

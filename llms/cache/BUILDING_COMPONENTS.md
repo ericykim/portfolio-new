@@ -17,7 +17,9 @@ apps/web/
 │   └── page.tsx           # Home page
 │
 ├── components/            # UI Components (non-route)
-│   └── CollapsibleSidebar.tsx
+│   ├── CollapsibleSidebar.tsx
+│   ├── PageHeader.tsx
+│   └── Providers.tsx      # Client-side providers wrapper
 │
 ├── context/               # React Context Providers
 │   ├── SidebarContext.tsx
@@ -26,6 +28,8 @@ apps/web/
 ├── styles/                # Global styles & fonts
 │   ├── globals.css
 │   └── typography.ts
+│
+├── hero.ts                # HeroUI plugin configuration
 │
 ├── public/                # Static assets
 │   ├── favicon.ico
@@ -36,6 +40,57 @@ apps/web/
 ```
 
 ## 🎨 Component Guidelines
+
+### UI Component Library
+
+**We use HeroUI (formerly NextUI)** - A beautiful, fast, and modern React UI library built on top of Tailwind CSS.
+
+- **Documentation:** https://www.heroui.com/docs/
+- **Version:** 2.8.5
+- **Peer Dependencies:** framer-motion (for animations)
+
+#### Why HeroUI?
+
+- Pre-built, accessible components
+- Full dark mode support
+- Seamless Tailwind CSS v4 integration
+- TypeScript support
+- Customizable theming
+- Production-ready with consistent design
+
+#### Using HeroUI Components
+
+Import components from `@heroui/react`:
+
+```tsx
+import { Button, Card, CardBody, Chip } from "@heroui/react";
+
+function MyComponent() {
+  return (
+    <Card>
+      <CardBody>
+        <Button color="primary">Click me</Button>
+        <Chip color="success">New</Chip>
+      </CardBody>
+    </Card>
+  );
+}
+```
+
+#### Available Components
+
+HeroUI provides 70+ components including:
+
+- **Actions:** Button, Link, Pagination
+- **Forms:** Input, Select, Checkbox, Switch, Slider, Textarea
+- **Data Display:** Card, Table, Avatar, Badge, Chip
+- **Feedback:** Alert, Progress, Spinner, Skeleton, Toast
+- **Navigation:** Navbar, Breadcrumbs, Tabs, Drawer
+- **Overlays:** Modal, Popover, Dropdown, Tooltip
+- **Date & Time:** Calendar, Date Picker, Time Input
+- **And more...**
+
+See full list: https://www.heroui.com/docs/components/
 
 ### Location Rules
 
@@ -123,7 +178,41 @@ Use these Tailwind color classes for consistency:
 
 ## 🏗️ Built Components
 
-### 1. CollapsibleSidebar
+### 1. Providers
+
+**Location:** `components/Providers.tsx`
+
+**Purpose:** Client-side providers wrapper to enable HeroUI and context usage while keeping root layout as a Server Component.
+
+**Features:**
+
+- Wraps `HeroUIProvider` for component library access
+- Wraps `ThemeProvider` for dark mode management
+- Wraps `SidebarProvider` for sidebar state
+- Marked with `"use client"` directive
+
+**Why it exists:**
+
+Next.js doesn't allow exporting `metadata` from client components. By isolating all client providers in this component, the root `layout.tsx` remains a Server Component and can export metadata.
+
+**Usage:**
+
+```tsx
+// app/layout.tsx
+import { Providers } from "@/components/Providers";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+### 2. CollapsibleSidebar
 
 **Location:** `components/CollapsibleSidebar.tsx`
 
@@ -134,13 +223,14 @@ Use these Tailwind color classes for consistency:
 - Mobile responsive with overlay
 - Active route highlighting
 - Dark mode support
-- Theme toggle button at bottom
+- Theme toggle button at bottom (uses HeroUI Button)
 
 **Dependencies:**
 
 - `context/SidebarContext.tsx` - Sidebar state
 - `context/ThemeContext.tsx` - Theme state
 - `lucide-react` - Icons
+- `@heroui/react` - Button component
 
 **Usage:**
 
@@ -150,7 +240,26 @@ import { CollapsibleSidebar } from "@/components/CollapsibleSidebar";
 <CollapsibleSidebar />;
 ```
 
-### 2. SidebarContext
+### 3. PageHeader
+
+**Location:** `components/PageHeader.tsx`
+
+**Features:**
+
+- Displays current page name based on route
+- Shows Beta badge (using HeroUI Chip)
+- Sticky positioning
+- Dark mode support
+
+**Usage:**
+
+```tsx
+import { PageHeader } from "@/components/PageHeader";
+
+<PageHeader />;
+```
+
+### 4. SidebarContext
 
 **Location:** `context/SidebarContext.tsx`
 
@@ -162,7 +271,7 @@ import { CollapsibleSidebar } from "@/components/CollapsibleSidebar";
 const { isOpen, toggle, close } = useSidebar();
 ```
 
-### 3. ThemeContext
+### 5. ThemeContext
 
 **Location:** `context/ThemeContext.tsx`
 
@@ -204,6 +313,60 @@ font-family: var(--font-pp-telegraf);
 font-family: var(--font-pp-woodland);
 ```
 
+## ⚙️ HeroUI Configuration
+
+### Setup Files
+
+**1. `hero.ts`** - HeroUI plugin export for Tailwind v4
+
+```ts
+import { heroui } from "@heroui/react";
+
+export default heroui();
+```
+
+**2. `styles/globals.css`** - CSS imports
+
+```css
+@import "tailwindcss";
+@plugin "../hero.ts";
+
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+The `@plugin` directive loads the HeroUI plugin using Tailwind v4's CSS-first approach.
+
+### Dark Mode Integration
+
+HeroUI components automatically support dark mode and respect the `.dark` class on the `<html>` element. No additional configuration needed - it works seamlessly with our existing `ThemeContext`.
+
+### Customizing HeroUI
+
+To customize the HeroUI theme, update `hero.ts`:
+
+```ts
+import { heroui } from "@heroui/react";
+
+export default heroui({
+  themes: {
+    light: {
+      colors: {
+        primary: "#0070f3",
+        // ... more colors
+      },
+    },
+    dark: {
+      colors: {
+        primary: "#3291ff",
+        // ... more colors
+      },
+    },
+  },
+});
+```
+
+See: https://www.heroui.com/docs/customization/theme
+
 ## 🎯 Component Checklist
 
 When building a new component:
@@ -216,6 +379,8 @@ When building a new component:
 - [ ] Use TypeScript with proper types
 - [ ] Use 'use client' directive if using hooks
 - [ ] Follow existing naming conventions
+- [ ] **Consider using HeroUI components** instead of building from scratch
+- [ ] Ensure HeroUI components have proper dark mode styling
 
 ## 🚀 Next.js Patterns
 
@@ -256,9 +421,38 @@ The root layout (`app/layout.tsx`) uses a fixed-height, non-scrolling structure:
 - **Server Components** (default): Pages, layouts that don't use hooks
 - **Client Components** (`'use client'`): Components using hooks, context, event handlers
 
+**Important Pattern for HeroUI:**
+
+Since `HeroUIProvider` is a client component, you cannot export `metadata` from a layout that uses it directly. Solution:
+
+```tsx
+// ✅ Correct - Separate Providers component
+// components/Providers.tsx
+"use client";
+export function Providers({ children }) {
+  return <HeroUIProvider>{children}</HeroUIProvider>;
+}
+
+// app/layout.tsx (Server Component)
+export const metadata = { ... }; // ✅ Works!
+export default function RootLayout({ children }) {
+  return <Providers>{children}</Providers>;
+}
+
+// ❌ Wrong - Directly using HeroUIProvider
+// app/layout.tsx
+"use client"; // This makes it a client component
+export const metadata = { ... }; // ❌ Error!
+export default function RootLayout({ children }) {
+  return <HeroUIProvider>{children}</HeroUIProvider>;
+}
+```
+
 ## 🔄 Updates Log
 
 ### 2024-11-24
+
+**Morning:**
 
 - Initial component structure established
 - CollapsibleSidebar with theme toggle created
@@ -266,6 +460,19 @@ The root layout (`app/layout.tsx`) uses a fixed-height, non-scrolling structure:
 - Dark mode fully functional with Tailwind v4
 - Typography system with PP Telegraf and PP Woodland fonts
 - Fixed-height layout with internal scrolling
+
+**Afternoon:**
+
+- ✨ **HeroUI Integration Complete**
+- Installed `@heroui/react@2.8.5` and `framer-motion@12.23.24`
+- Created `hero.ts` configuration file for Tailwind v4
+- Updated `globals.css` with `@plugin` directive
+- Created `Providers.tsx` wrapper component for client-side providers
+- Refactored layout to keep metadata export working
+- Updated CollapsibleSidebar to use HeroUI Button components
+- Added PageHeader with HeroUI Chip component
+- Created `/demo` page showcasing HeroUI components (Buttons, Cards, Chips, etc.)
+- Full dark mode compatibility with HeroUI maintained
 
 ---
 

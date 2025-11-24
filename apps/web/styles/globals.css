@@ -1,26 +1,18 @@
 @import "tailwindcss";
+@plugin "../hero.ts";
+
+@source '../../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 @custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --font-sans: var(--font-pp-telegraf), system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-pp-woodland), system-ui, -apple-system, sans-serif;
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-pp-telegraf), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-pp-telegraf),
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 /* Heading defaults - Woodland for all headings */
@@ -30,7 +22,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-pp-woodland), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-pp-woodland),
+    system-ui,
+    -apple-system,
+    sans-serif;
   font-weight: 700;
   margin: 0;
 }

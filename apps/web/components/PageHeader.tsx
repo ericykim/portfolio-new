@@ -1,6 +1,9 @@
 "use client";
 
+import { Button } from "@heroui/react";
+import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useSidebar } from "@/context/SidebarContext";
 
 const routeNames: Record<string, string> = {
   "/": "Home",
@@ -16,6 +19,7 @@ const routeNames: Record<string, string> = {
 
 export function PageHeader() {
   const pathname = usePathname();
+  const { toggle } = useSidebar();
 
   // Get the page name from the route map
   // For slug pages, use the parent route
@@ -31,8 +35,21 @@ export function PageHeader() {
   }
 
   return (
-    <div className="sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 px-6 flex items-center min-h-[60px]">
-      <h1 className="text-xl font-semibold leading-none">{pageName}</h1>
+    <div className="min-h-[60px] sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 px-6 flex flex-row items-center justify-start items-center gap-2">
+      <Button
+        isIconOnly
+        aria-label="Toggle menu"
+        color="default"
+        variant="light"
+        size="md"
+        onClick={toggle}
+        className="text-neutral-900 dark:text-neutral-100"
+      >
+        <Menu className="w-5 h-5" />
+      </Button>
+      <h1 className="text-xl font-semibold leading-none h-[15px]">
+        {pageName}
+      </h1>
     </div>
   );
 }

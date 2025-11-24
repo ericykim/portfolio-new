@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "@/styles/globals.css";
-import { SidebarProvider } from "@/context/SidebarContext";
-import { ThemeProvider } from "@/context/ThemeContext";
 import { CollapsibleSidebar } from "@/components/CollapsibleSidebar";
 import { PageHeader } from "@/components/PageHeader";
 import { ppTelegraf, ppWoodland } from "@/styles/typography";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "Eric Kim",
@@ -33,19 +32,17 @@ export default function RootLayout({
       <body
         className={`${ppTelegraf.variable} ${ppWoodland.variable} antialiased bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 overflow-hidden`}
       >
-        <ThemeProvider>
-          <SidebarProvider>
-            <div className="flex h-dvh bg-neutral-100 dark:bg-neutral-900">
-              <CollapsibleSidebar />
-              <div className="flex-1 transition-all duration-200 p-4 overflow-hidden">
-                <div className="h-full mx-auto bg-white dark:bg-neutral-950 rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden">
-                  <PageHeader />
-                  <div className="flex-1 overflow-y-auto">{children}</div>
-                </div>
+        <Providers>
+          <div className="flex h-dvh bg-neutral-100 dark:bg-neutral-900">
+            <CollapsibleSidebar />
+            <div className="flex-1 transition-all duration-200 p-4 overflow-hidden">
+              <div className="h-full mx-auto bg-white dark:bg-neutral-950 rounded-2xl shadow-sm border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden">
+                <PageHeader />
+                <div className="flex-1 overflow-y-auto">{children}</div>
               </div>
             </div>
-          </SidebarProvider>
-        </ThemeProvider>
+          </div>
+        </Providers>
       </body>
     </html>
   );
