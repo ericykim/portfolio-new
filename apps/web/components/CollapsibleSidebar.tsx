@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Home,
   FileText,
@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Sun,
   Moon,
+  Hammer,
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -29,7 +30,7 @@ const mainNavItems: NavItem[] = [{ href: "/", label: "Home", icon: Home }];
 
 const craftNavItems: NavItem[] = [
   { href: "/writing", label: "Writing", icon: FileText },
-  { href: "/work", label: "Projects", icon: Briefcase },
+  { href: "/projects", label: "Projects", icon: Hammer },
 ];
 
 const personalNavItems: NavItem[] = [
@@ -43,6 +44,7 @@ export function CollapsibleSidebar() {
   const pathname = usePathname();
   const { isOpen, toggle, close } = useSidebar();
   const { theme, toggleTheme } = useTheme();
+  const [backdropReady, setBackdropReady] = useState(false);
 
   // Close sidebar when route changes on mobile
   useEffect(() => {
@@ -51,13 +53,27 @@ export function CollapsibleSidebar() {
     }
   }, [pathname, close]);
 
+  // Delay backdrop interactivity to prevent immediate close on mobile
+  useEffect(() => {
+    if (isOpen) {
+      // Small delay before backdrop becomes clickable
+      const timer = setTimeout(() => setBackdropReady(true), 100);
+      return () => {
+        clearTimeout(timer);
+        setBackdropReady(false);
+      };
+    }
+    return () => setBackdropReady(false);
+  }, [isOpen]);
+
   return (
     <>
       {/* Backdrop overlay on mobile only */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
-          onClick={close}
+          onClick={backdropReady ? close : undefined}
+          style={{ pointerEvents: backdropReady ? "auto" : "none" }}
         />
       )}
 
@@ -96,7 +112,9 @@ export function CollapsibleSidebar() {
             {/* Main Navigation */}
             {mainNavItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(item.href + "/"));
 
               return (
                 <Link
@@ -132,7 +150,9 @@ export function CollapsibleSidebar() {
 
               {craftNavItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href;
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== "/" && pathname.startsWith(item.href + "/"));
 
                 return (
                   <Link
@@ -169,7 +189,9 @@ export function CollapsibleSidebar() {
 
               {personalNavItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href;
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== "/" && pathname.startsWith(item.href + "/"));
 
                 return (
                   <Link
@@ -232,8 +254,11 @@ export function CollapsibleSidebar() {
       {/* Expand button when closed */}
       {!isOpen && (
         <button
-          onClick={toggle}
-          className="fixed top-4 left-4 z-30 p-2 rounded-md bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors shadow-sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggle();
+          }}
+          className="fixed top-4 left-4 z-[60] p-2 rounded-md bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors shadow-sm md:shadow-md"
           aria-label="Expand sidebar"
         >
           <ChevronRight className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
