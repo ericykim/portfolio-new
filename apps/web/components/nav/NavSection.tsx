@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "@heroui/react";
+import { Button, cn } from "@heroui/react";
 
 interface NavItem {
   href: string;
@@ -37,21 +37,24 @@ export function NavSection({
           (item.href !== "/" && currentPath.startsWith(item.href + "/"));
 
         return (
-          <Link
+          <Button
             key={item.href}
+            as={Link}
             href={item.href}
+            variant="light"
             className={cn(
-              "flex items-center gap-2.5 px-2 py-1.5 rounded-md",
+              "flex items-center justify-start gap-2.5 h-auto min-h-0 px-2 py-1.5 w-full",
               "text-sm font-medium whitespace-nowrap",
-              "transition-colors duration-150 ease-in-out",
+              "data-[hover=true]:bg-neutral-100 dark:data-[hover=true]:bg-neutral-900/70",
+              "data-[pressed=true]:scale-[0.98]",
               isActive
-                ? "bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
-                : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 hover:text-neutral-900 dark:hover:text-neutral-100"
+                ? "bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-semibold"
+                : "text-neutral-600 dark:text-neutral-400 data-[hover=true]:text-neutral-900 dark:data-[hover=true]:text-neutral-100"
             )}
           >
             <Icon className="w-[18px] h-[18px] flex-shrink-0" strokeWidth={2} />
             <span>{item.label}</span>
-          </Link>
+          </Button>
         );
       })}
     </div>

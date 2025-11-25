@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  startTransition,
+} from "react";
+import { usePathname } from "next/navigation";
 import { SM_BREAKPOINT } from "@/utils/breakpoints";
 
 interface SidebarContextType {
@@ -22,6 +29,7 @@ export const useSidebar = () => useContext(SidebarContext);
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   // Start closed to match server-side rendering
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggle = () => {
     setIsOpen((prev) => !prev);
@@ -45,6 +53,19 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     };
     openMenuOnDesktop();
   }, []);
+
+  // Close sidebar on mobile when route changes
+  useEffect(() => {
+    const isMobile = window.innerWidth < SM_BREAKPOINT;
+    if (isMobile) {
+      startTransition(() => {
+        setIsOpen((prev) => {
+          if (prev) return false;
+          return prev;
+        });
+      });
+    }
+  }, [pathname]);
 
   return (
     <SidebarContext.Provider value={{ isOpen, toggle, open, close }}>

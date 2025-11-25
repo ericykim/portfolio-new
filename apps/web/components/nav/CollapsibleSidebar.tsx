@@ -60,7 +60,7 @@ export function CollapsibleSidebar() {
         className={cn(
           `
           fixed sm:relative z-50 sm:z-0
-          transition-all duration-200 ease-in-out
+          transition-[width,transform] duration-200 ease-in-out
           bg-neutral-100 dark:bg-neutral-900
           overflow-hidden
           
@@ -75,7 +75,7 @@ export function CollapsibleSidebar() {
       >
         <div className="flex flex-col h-full sm:h-dvh w-56 p-0 sm:py-4 sm:pl-4">
           {/* Header */}
-          <div className="flex items-center justify-between min-h-[60px] pl-2">
+          <div className="flex items-center justify-between min-h-[60px] px-4 sm:pl-2 sm:pr-0">
             <div className="flex items-center gap-2.5">
               <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0" />
               <span className="font-semibold text-sm whitespace-nowrap">
@@ -95,7 +95,7 @@ export function CollapsibleSidebar() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-0.5 overflow-y-auto">
+          <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 sm:px-0">
             {/* Main Navigation */}
             <NavSection items={mainNavItems} currentPath={pathname} />
 
@@ -117,7 +117,7 @@ export function CollapsibleSidebar() {
           </nav>
 
           {/* Theme Toggle and Social Links */}
-          <div className="mt-auto pt-3 pb-3 flex items-center gap-2">
+          <div className="mt-auto flex items-center gap-2 px-2 sm:px-0 pb-3 sm:pb-0">
             <Button
               onClick={toggleTheme}
               variant="light"

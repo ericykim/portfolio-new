@@ -38,7 +38,7 @@ export default function RootLayout({
             suppressHydrationWarning
           >
             <CollapsibleSidebar />
-            <div className="flex-1 transition-all duration-200 p-0 sm:p-4 overflow-hidden">
+            <div className="flex-1 transition-[margin,padding] duration-200 p-0 sm:p-4 overflow-hidden">
               <div className="h-full mx-auto bg-white dark:bg-neutral-950 sm:rounded-2xl shadow-sm sm:border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden">
                 <PageHeader />
                 <div className="flex overflow-y-auto">{children}</div>
