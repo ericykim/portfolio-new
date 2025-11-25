@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from "react";
 
-type Theme = 'light' | 'dark';
+type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
@@ -10,34 +10,34 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
+  theme: "light",
   toggleTheme: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(() => {
+    // Initialize theme from current DOM state
+    if (typeof window === "undefined") return "light";
 
-  // Initialize theme from current DOM state
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    setTheme(isDark ? 'dark' : 'light');
-  }, []);
+    const isDark = document.documentElement.classList.contains("dark");
+    return isDark ? "dark" : "light";
+  });
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    
+
     // Whenever the user explicitly chooses light mode
-    if (newTheme === 'light') {
-      localStorage.theme = 'light';
-      document.documentElement.classList.remove('dark');
+    if (newTheme === "light") {
+      localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
     }
     // Whenever the user explicitly chooses dark mode
     else {
-      localStorage.theme = 'dark';
-      document.documentElement.classList.add('dark');
+      localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
     }
   };
 
@@ -47,4 +47,3 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     </ThemeContext.Provider>
   );
 }
-

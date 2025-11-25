@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Home,
@@ -19,6 +18,7 @@ import {
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
 import { Button, cn } from "@heroui/react";
+import { NavSection } from "./NavSection";
 
 interface NavItem {
   href: string;
@@ -73,9 +73,9 @@ export function CollapsibleSidebar() {
           isOpen ? "w-56" : "w-0"
         )}
       >
-        <div className="flex flex-col h-full sm:h-dvh w-56 p-0 sm:p-4">
+        <div className="flex flex-col h-full sm:h-dvh w-56 p-0 sm:py-4 sm:pl-4">
           {/* Header */}
-          <div className="flex items-center justify-between min-h-[60px] px-4">
+          <div className="flex items-center justify-between min-h-[60px] pl-2">
             <div className="flex items-center gap-2.5">
               <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0" />
               <span className="font-semibold text-sm whitespace-nowrap">
@@ -95,119 +95,29 @@ export function CollapsibleSidebar() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-0.5 overflow-y-auto p-3">
+          <nav className="flex-1 space-y-0.5 overflow-y-auto">
             {/* Main Navigation */}
-            {mainNavItems.map((item) => {
-              const Icon = item.icon;
-              const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href + "/"));
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`
-                    flex items-center gap-2.5 px-2 py-1.5 rounded-md
-                    text-sm font-medium whitespace-nowrap
-                    transition-colors duration-150 ease-in-out
-                    ${
-                      isActive
-                        ? "bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
-                        : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 hover:text-neutral-900 dark:hover:text-neutral-100"
-                    }
-                  `}
-                >
-                  <Icon
-                    className="w-[18px] h-[18px] flex-shrink-0"
-                    strokeWidth={2}
-                  />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
+            <NavSection items={mainNavItems} currentPath={pathname} />
 
             {/* Craft Section */}
-            <div className="pt-4">
-              <div className="px-2 mb-1">
-                <p className="text-xs font-medium text-neutral-400 dark:text-neutral-500">
-                  Craft
-                </p>
-              </div>
-
-              {craftNavItems.map((item) => {
-                const Icon = item.icon;
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== "/" && pathname.startsWith(item.href + "/"));
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`
-                      flex items-center gap-2.5 px-2 py-1.5 rounded-md
-                      text-sm font-medium whitespace-nowrap
-                      transition-colors duration-150 ease-in-out
-                      ${
-                        isActive
-                          ? "bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
-                          : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 hover:text-neutral-900 dark:hover:text-neutral-100"
-                      }
-                    `}
-                  >
-                    <Icon
-                      className="w-[18px] h-[18px] flex-shrink-0"
-                      strokeWidth={2}
-                    />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
+            <NavSection
+              items={craftNavItems}
+              currentPath={pathname}
+              title="Craft"
+              className="pt-4"
+            />
 
             {/* Personal Section */}
-            <div className="pt-4">
-              <div className="px-2 mb-1">
-                <p className="text-xs font-medium text-neutral-400 dark:text-neutral-500">
-                  Personal
-                </p>
-              </div>
-
-              {personalNavItems.map((item) => {
-                const Icon = item.icon;
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== "/" && pathname.startsWith(item.href + "/"));
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`
-                      flex items-center gap-2.5 px-2 py-1.5 rounded-md
-                      text-sm font-medium whitespace-nowrap
-                      transition-colors duration-150 ease-in-out
-                      ${
-                        isActive
-                          ? "bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
-                          : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 hover:text-neutral-900 dark:hover:text-neutral-100"
-                      }
-                    `}
-                  >
-                    <Icon
-                      className="w-[18px] h-[18px] flex-shrink-0"
-                      strokeWidth={2}
-                    />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
+            <NavSection
+              items={personalNavItems}
+              currentPath={pathname}
+              title="Personal"
+              className="pt-4"
+            />
           </nav>
 
           {/* Theme Toggle and Social Links */}
-          <div className="mt-auto pt-3 pb-3 px-3 flex items-center gap-2">
+          <div className="mt-auto pt-3 pb-3 flex items-center gap-2">
             <Button
               onClick={toggleTheme}
               variant="light"
