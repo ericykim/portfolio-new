@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 type Theme = "light" | "dark";
 
@@ -10,20 +10,27 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: "light",
+  theme: "dark",
   toggleTheme: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Initialize theme from current DOM state
-    if (typeof window === "undefined") return "light";
+  // Start with dark as default for SSR, will sync on mount
+  const [theme, setTheme] = useState<Theme>("dark");
 
+  // After hydration, sync theme from DOM
+  // This is intentional one-time sync to match server/client state
+  useEffect(() => {
     const isDark = document.documentElement.classList.contains("dark");
-    return isDark ? "dark" : "light";
-  });
+    const currentTheme = isDark ? "dark" : "light";
+
+    if (currentTheme !== theme) {
+      setTheme(currentTheme);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";

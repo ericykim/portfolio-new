@@ -43,15 +43,20 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     setIsOpen(false);
   };
 
-  // Open on desktop after hydration to avoid hydration mismatch
+  // Open sidebar based on initial screen size (desktop OR mobile) after hydration
+  // This only runs once on mount and won't trigger on resize
   useEffect(() => {
-    const openMenuOnDesktop = () => {
+    const openMenuOnInitialLoad = () => {
       const isDesktop = window.innerWidth >= SM_BREAKPOINT;
-      if (isDesktop) {
+      const isMobile = window.innerWidth < SM_BREAKPOINT;
+
+      // Open on desktop OR mobile during initial mount
+      if (isDesktop || isMobile) {
         open();
       }
     };
-    openMenuOnDesktop();
+
+    openMenuOnInitialLoad();
   }, []);
 
   // Close sidebar on mobile when route changes

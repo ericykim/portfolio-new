@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import {
   Home,
   FileText,
@@ -77,7 +78,15 @@ export function CollapsibleSidebar() {
           {/* Header */}
           <div className="flex items-center justify-between min-h-[60px] px-4 sm:pl-2 sm:pr-0">
             <div className="flex items-center gap-2.5">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0" />
+              <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-neutral-200 dark:ring-neutral-800">
+                <Image
+                  src="/eric.jpg"
+                  alt="Eric Kim"
+                  width={24}
+                  height={24}
+                  className="object-cover"
+                />
+              </div>
               <span className="font-semibold text-sm whitespace-nowrap">
                 Eric Kim
               </span>
