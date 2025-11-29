@@ -35,7 +35,7 @@ export function PageHeader() {
   }
 
   return (
-    <div className="sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 flex flex-row items-center justify-start gap-2 min-h-[30px] sm:min-h-[60px] px-2 sm:px-6">
+    <div className="sticky top-0 z-10 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 flex flex-row flex-shrink-0 items-center justify-start gap-2 min-h-[40px] sm:min-h-[60px] px-2 sm:px-6">
       {!isOpen && (
         <Button
           isIconOnly
