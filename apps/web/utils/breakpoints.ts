@@ -18,3 +18,4 @@ export const XL_BREAKPOINT = 1280;
 /** Tailwind's `2xl` breakpoint - 1536px */
 export const XXL_BREAKPOINT = 1536;
 
+
