@@ -1,4 +1,4 @@
-import {defineQuery} from 'next-sanity'
+import { defineQuery } from "next-sanity";
 
 /**
  * Query for fetching the profile data (About Me section)
@@ -9,5 +9,4 @@ export const PROFILE_QUERY = defineQuery(`*[
 ][0]{
   _id,
   bio
-}`)
-
+}`);

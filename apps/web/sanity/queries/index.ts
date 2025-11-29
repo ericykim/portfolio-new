@@ -1,10 +1,10 @@
 // Export all individual queries
-export * from './profileQueries'
-export * from './workExperienceQueries'
-export * from './educationQueries'
-export * from './postQueries'
+export * from "./educationQueries";
+export * from "./postQueries";
+export * from "./profileQueries";
+export * from "./workExperienceQueries";
 
-import {defineQuery} from 'next-sanity'
+import { defineQuery } from "next-sanity";
 
 /**
  * Combined home page query
@@ -30,5 +30,4 @@ export const HOME_PAGE_QUERY = defineQuery(`{
     place,
     description
   }
-}`)
-
+}`);

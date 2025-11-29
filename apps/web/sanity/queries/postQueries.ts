@@ -1,4 +1,4 @@
-import {defineQuery} from 'next-sanity'
+import { defineQuery } from "next-sanity";
 
 /**
  * Query for fetching all posts
@@ -13,7 +13,7 @@ export const POSTS_QUERY = defineQuery(`*[
   publishedAt,
   image,
   body
-}`)
+}`);
 
 /**
  * Query for fetching a single post by slug
@@ -28,6 +28,4 @@ export const POST_BY_SLUG_QUERY = defineQuery(`*[
   publishedAt,
   image,
   body
-}`)
-
-
+}`);

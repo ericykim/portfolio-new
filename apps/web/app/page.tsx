@@ -1,10 +1,7 @@
-"use client";
-
 import { client } from "@/sanity/client";
 import { HOME_PAGE_QUERY } from "@/sanity/queries";
 import { PortableText, PortableTextBlock } from "next-sanity";
-import { Avatar, Spinner } from "@heroui/react";
-import { useQuery } from "@/hooks/useQuery";
+import Image from "next/image";
 
 interface WorkExperience {
   _id: string;
@@ -39,19 +36,10 @@ function formatDate(dateString: string): string {
   });
 }
 
-export default function IndexPage() {
-  const { data, isLoading } = useQuery<HomePageData>(
-    () => client.fetch<HomePageData>(HOME_PAGE_QUERY),
-    []
-  );
+const options = { next: { revalidate: 30 } };
 
-  if (isLoading) {
-    return (
-      <div className="w-full max-w-5xl mx-auto p-6 sm:p-8 md:p-12 flex items-center justify-center min-h-[400px]">
-        <Spinner color="warning" size="lg" />
-      </div>
-    );
-  }
+export default async function IndexPage() {
+  const data = await client.fetch<HomePageData>(HOME_PAGE_QUERY, {}, options);
 
   if (!data) {
     return (
@@ -67,14 +55,16 @@ export default function IndexPage() {
     <div className="w-full max-w-5xl mx-auto p-6 sm:p-8 md:p-12">
       {/* Avatar */}
       <div className="mb-12 flex justify-center md:justify-start md:pl-[132px]">
-        <Avatar
-          src="/eric.jpg"
-          alt="Eric Kim"
-          className="w-24 h-24 text-large"
-          imgProps={{
-            className: "object-cover",
-          }}
-        />
+        <div className="w-24 h-24 rounded-full overflow-hidden ring-2 ring-neutral-200 dark:ring-neutral-700">
+          <Image
+            src="/eric.jpg"
+            alt="Eric Kim"
+            width={96}
+            height={96}
+            className="object-cover w-full h-full"
+            priority
+          />
+        </div>
       </div>
 
       {/* About Me Section */}

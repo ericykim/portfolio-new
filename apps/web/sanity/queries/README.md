@@ -15,35 +15,40 @@ Each file contains queries related to a specific schema type:
 ## Available Queries
 
 ### Profile
+
 - `PROFILE_QUERY` - Fetches the single profile document with bio
 
 ### Work Experience
+
 - `WORK_EXPERIENCE_QUERY` - Fetches all work experience (ordered by display order, then start date)
 
 ### Education
+
 - `EDUCATION_QUERY` - Fetches all education entries (place and description)
 
 ### Posts
+
 - `POSTS_QUERY` - Fetches all posts (ordered by publish date)
 - `POST_BY_SLUG_QUERY` - Fetches a single post by slug parameter
 
 ### Combined
+
 - `HOME_PAGE_QUERY` - Fetches all home page data in one request (profile, work, education)
 
 ## Usage
 
 ```typescript
-import { HOME_PAGE_QUERY, POSTS_QUERY } from '@/sanity/queries'
-import { client } from '@/sanity/client'
+import { HOME_PAGE_QUERY, POSTS_QUERY } from "@/sanity/queries";
+import { client } from "@/sanity/client";
 
 // Fetch home page data
-const homeData = await client.fetch(HOME_PAGE_QUERY)
+const homeData = await client.fetch(HOME_PAGE_QUERY);
 
 // Fetch posts
-const posts = await client.fetch(POSTS_QUERY)
+const posts = await client.fetch(POSTS_QUERY);
 
 // Fetch single post with parameter
-const post = await client.fetch(POST_BY_SLUG_QUERY, { slug: 'my-post' })
+const post = await client.fetch(POST_BY_SLUG_QUERY, { slug: "my-post" });
 ```
 
 ## Adding New Queries
@@ -70,4 +75,3 @@ export const MY_TYPE_QUERY = defineQuery(\`*[
 ## Schema Types
 
 Schema type definitions are located in `apps/studio/schemaTypes/`
-
