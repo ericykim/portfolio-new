@@ -52,98 +52,100 @@ export default async function IndexPage() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-6 sm:p-8 md:p-12">
-      {/* Avatar */}
-      <div className="mb-12 flex justify-center md:justify-start md:pl-[132px]">
-        <div className="w-24 h-24 rounded-full overflow-hidden ring-2 ring-neutral-200 dark:ring-neutral-700">
-          <Image
-            src="/eric.jpg"
-            alt="Eric Kim"
-            width={96}
-            height={96}
-            className="object-cover w-full h-full"
-            priority
-          />
-        </div>
-      </div>
-
-      {/* About Me Section */}
-      {data.profile && (
-        <section className="mb-12 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:gap-8">
-          <h2 className="text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            about me
-          </h2>
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <PortableText value={data.profile.bio} />
+    <div className="w-full overflow-y-auto">
+      <div className="max-w-5xl mx-auto p-6 sm:p-8 md:p-12">
+        {/* Avatar */}
+        <div className="mb-12 flex justify-center md:justify-start md:pl-[132px]">
+          <div className="w-24 h-24 rounded-full overflow-hidden ring-2 ring-neutral-200 dark:ring-neutral-700">
+            <Image
+              src="/eric.jpg"
+              alt="Eric Kim"
+              width={96}
+              height={96}
+              className="object-cover w-full h-full"
+              priority
+            />
           </div>
-        </section>
-      )}
+        </div>
 
-      {/* Work Section */}
-      {data.workExperience && data.workExperience.length > 0 && (
-        <section className="mb-12 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:gap-8">
-          <h2 className="text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            work
-          </h2>
-          <div className="space-y-4">
-            {[...data.workExperience].reverse().map((work) => {
-              const startDate = formatDate(work.startDate);
-              const endDate =
-                work.current === "yes"
-                  ? "Present"
-                  : work.endDate
-                    ? formatDate(work.endDate)
-                    : "";
-              const dateRange = `${startDate} - ${endDate}`;
+        {/* About Me Section */}
+        {data.profile && (
+          <section className="mb-12 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:gap-8">
+            <h2 className="text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+              about me
+            </h2>
+            <div className="prose prose-neutral dark:prose-invert max-w-none">
+              <PortableText value={data.profile.bio} />
+            </div>
+          </section>
+        )}
 
-              return (
+        {/* Work Section */}
+        {data.workExperience && data.workExperience.length > 0 && (
+          <section className="mb-12 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:gap-8">
+            <h2 className="text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+              work
+            </h2>
+            <div className="space-y-4">
+              {[...data.workExperience].reverse().map((work) => {
+                const startDate = formatDate(work.startDate);
+                const endDate =
+                  work.current === "yes"
+                    ? "Present"
+                    : work.endDate
+                      ? formatDate(work.endDate)
+                      : "";
+                const dateRange = `${startDate} - ${endDate}`;
+
+                return (
+                  <div
+                    key={work._id}
+                    className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 border-b border-neutral-200 dark:border-neutral-800 pb-4 last:border-0"
+                  >
+                    <div className="flex-1">
+                      <div className="font-medium text-neutral-900 dark:text-neutral-100">
+                        {work.company}
+                      </div>
+                      <div className="text-neutral-600 dark:text-neutral-400">
+                        {work.role}
+                      </div>
+                    </div>
+                    <div className="text-sm text-neutral-500 dark:text-neutral-500 whitespace-nowrap">
+                      {dateRange}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Education Section */}
+        {data.education && data.education.length > 0 && (
+          <section className="mb-12 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:gap-8">
+            <h2 className="text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+              education
+            </h2>
+            <div className="space-y-4">
+              {[...data.education].reverse().map((edu) => (
                 <div
-                  key={work._id}
+                  key={edu._id}
                   className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 border-b border-neutral-200 dark:border-neutral-800 pb-4 last:border-0"
                 >
                   <div className="flex-1">
                     <div className="font-medium text-neutral-900 dark:text-neutral-100">
-                      {work.company}
-                    </div>
-                    <div className="text-neutral-600 dark:text-neutral-400">
-                      {work.role}
+                      {edu.place}
                     </div>
                   </div>
-                  <div className="text-sm text-neutral-500 dark:text-neutral-500 whitespace-nowrap">
-                    {dateRange}
+                  <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                    {edu.description}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* Education Section */}
-      {data.education && data.education.length > 0 && (
-        <section className="mb-12 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:gap-8">
-          <h2 className="text-sm uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            education
-          </h2>
-          <div className="space-y-4">
-            {[...data.education].reverse().map((edu) => (
-              <div
-                key={edu._id}
-                className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 border-b border-neutral-200 dark:border-neutral-800 pb-4 last:border-0"
-              >
-                <div className="flex-1">
-                  <div className="font-medium text-neutral-900 dark:text-neutral-100">
-                    {edu.place}
-                  </div>
-                </div>
-                <div className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {edu.description}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
     </div>
   );
 }

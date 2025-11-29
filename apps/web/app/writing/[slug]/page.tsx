@@ -3,8 +3,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/client";
 import Link from "next/link";
-
-const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
+import Image from "next/image";
+import { POST_BY_SLUG_QUERY } from "@/sanity/queries";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -19,34 +19,41 @@ export default async function PostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const post = await client.fetch<SanityDocument>(
-    POST_QUERY,
-    await params,
+    POST_BY_SLUG_QUERY,
+    { slug },
     options
   );
+
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(550).height(310).url()
     : null;
 
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
-      <Link href="/writing" className="hover:underline">
+    <div className="container mx-auto max-w-3xl p-8 flex flex-col gap-4">
+      <Link
+        href="/writing"
+        className="hover:underline text-neutral-600 dark:text-neutral-400 md:hidden"
+      >
         ← Back to posts
       </Link>
       {postImageUrl && (
-        <img
+        <Image
           src={postImageUrl}
           alt={post.title}
           className="aspect-video rounded-xl"
-          width="550"
-          height="310"
+          width={550}
+          height={310}
         />
       )}
-      <h1 className="text-4xl font-bold mb-8">{post.title}</h1>
-      <div className="prose">
-        <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p>
+      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+      <div className="prose dark:prose-invert max-w-none">
+        <p className="text-neutral-600 dark:text-neutral-400">
+          Published: {new Date(post.publishedAt).toLocaleDateString()}
+        </p>
         {Array.isArray(post.body) && <PortableText value={post.body} />}
       </div>
-    </main>
+    </div>
   );
 }

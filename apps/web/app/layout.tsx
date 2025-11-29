@@ -33,15 +33,12 @@ export default function RootLayout({
         className={`${ppTelegraf.variable} ${ppWoodland.variable} antialiased bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 overflow-hidden`}
       >
         <Providers>
-          <div
-            className="flex h-dvh bg-neutral-100 dark:bg-neutral-900"
-            suppressHydrationWarning
-          >
+          <div className="flex h-dvh bg-neutral-100 dark:bg-neutral-900">
             <CollapsibleSidebar />
             <div className="flex-1 transition-[margin,padding] duration-200 p-0 sm:p-4 overflow-hidden">
               <div className="h-full mx-auto bg-white dark:bg-neutral-950 sm:rounded-2xl shadow-sm sm:border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden">
                 <PageHeader />
-                <div className="flex overflow-y-auto grow">{children}</div>
+                <div className="flex grow overflow-hidden">{children}</div>
               </div>
             </div>
           </div>
