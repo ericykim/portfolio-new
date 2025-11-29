@@ -52,7 +52,7 @@ export default async function IndexPage() {
   }
 
   return (
-    <div className="w-full overflow-y-auto">
+    <div className="w-full overflow-y-auto" data-scroll-container>
       <div className="max-w-5xl mx-auto p-6 sm:p-8 md:p-12">
         {/* Avatar */}
         <div className="mb-12 flex justify-center md:justify-start md:pl-[132px]">

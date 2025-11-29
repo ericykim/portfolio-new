@@ -25,7 +25,7 @@ export function ContentLayout<T extends ContentListItem>({
   return (
     <>
       {/* Mobile: Show list when no item selected, show content when item is selected */}
-      <div className="md:hidden overflow-y-auto w-full">
+      <div className="md:hidden overflow-y-auto w-full" data-scroll-container>
         {activeSlug ? (
           // Show content when an item is selected
           <main className="w-full">{children || emptyState}</main>
@@ -51,7 +51,7 @@ export function ContentLayout<T extends ContentListItem>({
         </div>
 
         {/* Main content area - remaining space on desktop with independent scroll */}
-        <main className="flex-1 overflow-y-auto grow">
+        <main className="flex-1 overflow-y-auto grow" data-scroll-container>
           {children || emptyState}
         </main>
       </div>
