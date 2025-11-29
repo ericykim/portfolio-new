@@ -34,11 +34,11 @@ export function ContentList<T extends ContentListItem>({
         href={`${basePath}/${slugCurrent}`}
         key={item._id}
         className={`
-          block p-4 md:p-4 border-l-2 md:border-l-2 transition-all duration-200
+          block p-4 md:p-4 border-l-2 md:border-l-2 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-200
           ${
             isActive
-              ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
-              : "border-transparent hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900/50"
+              ? "border-l-blue-500 bg-blue-50 dark:bg-blue-950/20"
+              : "border-l-transparent hover:border-l-neutral-300 dark:hover:border-l-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900/50"
           }
         `}
       >
@@ -62,14 +62,15 @@ export function ContentList<T extends ContentListItem>({
     <aside
       className="
         w-full md:w-[200px] md:min-w-[200px]
-        h-auto md:h-screen
+        h-auto md:h-full
         border-b md:border-b-0 md:border-r
         border-neutral-200 dark:border-neutral-800
         bg-white dark:bg-neutral-950
         md:overflow-y-auto md:overflow-x-hidden scroll-smooth
+        rounded-none md:rounded-bl-2xl
       "
     >
-      <div className="divide-y divide-neutral-200 dark:divide-neutral-800">
+      <div>
         {items.map((item) =>
           renderItem ? renderItem(item) : defaultRenderItem(item)
         )}
