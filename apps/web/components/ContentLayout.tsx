@@ -25,7 +25,7 @@ export function ContentLayout<T extends ContentListItem>({
   return (
     <>
       {/* Mobile: Show list when no item selected, show content when item is selected */}
-      <div className="md:hidden overflow-y-auto w-full" data-scroll-container>
+      <div className="md:hidden w-full" data-scroll-container>
         {activeSlug ? (
           // Show content when an item is selected
           <main className="w-full">{children || emptyState}</main>
@@ -40,7 +40,7 @@ export function ContentLayout<T extends ContentListItem>({
       </div>
 
       {/* Desktop: Show list + content */}
-      <div className="hidden md:flex md:flex-row h-full w-full">
+      <div className="hidden md:flex md:flex-row h-full w-full overflow-hidden">
         {/* Sidebar - 200px fixed on desktop with independent scroll */}
         <div className="shrink-0 overflow-y-auto">
           <ContentList
