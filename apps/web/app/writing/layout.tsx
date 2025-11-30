@@ -1,6 +1,7 @@
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import { type ContentListItem, type Tag } from "@/components/ContentList";
+import { type ContentListItem } from "@/components/ContentList";
+import { type Tag } from "@/components/Tag";
 import { POSTS_QUERY, ALL_TAGS_QUERY } from "@/sanity/queries";
 import { ContentLayoutWrapper } from "@/components/ContentLayoutWrapper";
 

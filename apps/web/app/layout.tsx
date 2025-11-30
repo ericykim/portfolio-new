@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "@/styles/globals.css";
 import { CollapsibleSidebar } from "@/components/nav/CollapsibleSidebar";
@@ -9,12 +9,13 @@ import { Providers } from "@/components/Providers";
 export const metadata: Metadata = {
   title: "Eric Kim",
   description: "Eric's corner of the internet",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: true,
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: true,
 };
 
 export default function RootLayout({
@@ -39,12 +40,14 @@ export default function RootLayout({
         className={`${ppTelegraf.variable} ${ppWoodland.variable} antialiased bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100`}
       >
         <Providers>
-          <div className="flex min-h-dvh max-h-dvh md:max-h-dvh bg-neutral-100 dark:bg-neutral-900">
+          <div className="flex bg-neutral-100 dark:bg-neutral-900">
             <CollapsibleSidebar />
-            <div className="flex-1 transition-[margin,padding] duration-200 p-0 sm:p-4 max-h-dvh md:max-h-dvh">
+            <div className="flex-1 transition-[margin,padding] duration-200 p-0 sm:p-4 max-h-dvh max-w-dvw">
               <div className="h-full mx-auto bg-white dark:bg-neutral-950 sm:rounded-2xl shadow-sm sm:border border-neutral-200 dark:border-neutral-800 flex flex-col">
                 <PageHeader />
-                <div className="flex grow overflow-hidden">{children}</div>
+                <div className="flex flex-1 min-h-0 overflow-hidden">
+                  {children}
+                </div>
               </div>
             </div>
           </div>

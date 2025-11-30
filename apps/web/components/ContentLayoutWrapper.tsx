@@ -2,7 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import { ContentLayout } from "@/components/ContentLayout";
-import { type ContentListItem, type Tag } from "@/components/ContentList";
+import { type ContentListItem } from "@/components/ContentList";
+import { type Tag } from "@/components/Tag";
 
 interface ContentLayoutWrapperProps {
   items: ContentListItem[];

@@ -1,22 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Chip } from "@heroui/react";
+import { Input } from "@heroui/react";
 import { Search } from "lucide-react";
-import { Tag } from "./ContentList";
+import { Tag as TagChip, type Tag } from "./Tag";
 import { useDebouncedCallback } from "@/hooks/useDebouncedCallback";
-
-// Tag color mapping - customize as needed
-const TAG_COLORS: Record<
-  string,
-  "default" | "primary" | "secondary" | "success" | "warning" | "danger"
-> = {
-  design: "secondary",
-  dev: "primary",
-  list: "warning",
-  sports: "success",
-  project: "danger",
-};
 
 interface ContentFilterProps {
   allTags?: Tag[];
@@ -56,30 +44,20 @@ export function ContentFilter({
       />
 
       {/* Tag Chips - Horizontal Scrollable List */}
-      <div className="flex gap-1.5 md:gap-1 overflow-x-auto overflow-y-hidden pb-1">
+      <div className="flex gap-1.5 md:gap-1 overflow-x-auto overflow-y-hidden pb-1 scrollbar-hide">
         {allTags.length === 0 ? (
           <p className="text-xs text-neutral-400 dark:text-neutral-500">
             No tags found
           </p>
         ) : (
-          allTags.map((tag) => {
-            const tagSlug = tag.slug.current;
-            const color = TAG_COLORS[tagSlug] || "default";
-            return (
-              <Chip
-                key={tag._id}
-                color={color}
-                size="sm"
-                variant="flat"
-                classNames={{
-                  base: "h-6 md:h-5 cursor-pointer transition-transform hover:scale-105 flex-shrink-0",
-                  content: "text-xs md:text-[10px] font-medium px-1",
-                }}
-              >
-                {tag.name}
-              </Chip>
-            );
-          })
+          allTags.map((tag) => (
+            <div
+              key={tag._id}
+              className="cursor-pointer transition-transform hover:scale-105"
+            >
+              <TagChip slug={tag.slug.current} name={tag.name} />
+            </div>
+          ))
         )}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
-import { ContentList, type ContentListItem, type Tag } from "./ContentList";
+import { ContentList, type ContentListItem } from "./ContentList";
+import { type Tag } from "./Tag";
 
 export interface ContentLayoutProps<T extends ContentListItem> {
   items: T[];
