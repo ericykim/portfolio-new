@@ -31,13 +31,33 @@ export function ContentList<T extends ContentListItem>({
   allTags,
 }: ContentListProps<T>) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
 
-  // Filter items by search query
+  // Filter items by search query and selected tags
   const filteredItems = useMemo(() => {
-    if (!searchQuery.trim()) return items;
-    const query = searchQuery.toLowerCase();
-    return items.filter((item) => item.title?.toLowerCase().includes(query));
-  }, [items, searchQuery]);
+    let filtered = items;
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter((item) =>
+        item.title?.toLowerCase().includes(query)
+      );
+    }
+
+    // Filter by selected tags (item must have ALL selected tags)
+    if (selectedTagIds.length > 0) {
+      filtered = filtered.filter((item) => {
+        if (!item.tags || item.tags.length === 0) return false;
+        const itemTagIds = item.tags.map((tag) => tag._id);
+        return selectedTagIds.every((selectedId) =>
+          itemTagIds.includes(selectedId)
+        );
+      });
+    }
+
+    return filtered;
+  }, [items, searchQuery, selectedTagIds]);
 
   const defaultRenderItem = (item: T) => {
     const slugCurrent =
@@ -101,14 +121,20 @@ export function ContentList<T extends ContentListItem>({
       overflow-hidden
       "
     >
-      <ContentFilter allTags={allTags} onSearchChange={setSearchQuery} />
+      <ContentFilter
+        allTags={allTags}
+        onSearchChange={setSearchQuery}
+        onTagsChange={setSelectedTagIds}
+      />
       <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-white dark:bg-neutral-950">
         {filteredItems.map((item) =>
           renderItem ? renderItem(item) : defaultRenderItem(item)
         )}
         {filteredItems.length === 0 && (
           <div className="p-8 text-center text-neutral-500 dark:text-neutral-400 text-sm">
-            {searchQuery ? "No items match your search" : "No items to display"}
+            {searchQuery || selectedTagIds.length > 0
+              ? "No items match your filters"
+              : "No items to display"}
           </div>
         )}
       </div>

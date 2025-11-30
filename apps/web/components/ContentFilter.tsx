@@ -9,13 +9,16 @@ import { useDebouncedCallback } from "@/hooks/useDebouncedCallback";
 interface ContentFilterProps {
   allTags?: Tag[];
   onSearchChange: (query: string) => void;
+  onTagsChange: (tagIds: string[]) => void;
 }
 
 export function ContentFilter({
   allTags = [],
   onSearchChange,
+  onTagsChange,
 }: ContentFilterProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
   const debouncedSearch = useDebouncedCallback(onSearchChange, 300);
 
   const handleSearchChange = (value: string) => {
@@ -27,6 +30,27 @@ export function ContentFilter({
     setSearchQuery("");
     onSearchChange("");
   };
+
+  const handleTagSelect = (tagId: string) => {
+    const newSelectedTags = selectedTagIds.includes(tagId)
+      ? selectedTagIds.filter((id) => id !== tagId)
+      : [...selectedTagIds, tagId];
+    setSelectedTagIds(newSelectedTags);
+    onTagsChange(newSelectedTags);
+  };
+
+  const handleTagRemove = (tagId: string) => {
+    const newSelectedTags = selectedTagIds.filter((id) => id !== tagId);
+    setSelectedTagIds(newSelectedTags);
+    onTagsChange(newSelectedTags);
+  };
+
+  const selectedTags = allTags.filter((tag) =>
+    selectedTagIds.includes(tag._id)
+  );
+  const availableTags = allTags.filter(
+    (tag) => !selectedTagIds.includes(tag._id)
+  );
 
   return (
     <div className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 p-3 md:p-4 space-y-3 md:space-y-4">
@@ -59,20 +83,35 @@ export function ContentFilter({
         radius="md"
       />
 
-      {/* Tag Chips - Horizontal Scrollable List */}
+      {/* Selected Tags - Wrapping List */}
+      {selectedTags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 md:gap-1">
+          {selectedTags.map((tag) => (
+            <TagChip
+              key={tag._id}
+              slug={tag.slug.current}
+              name={tag.name}
+              isSelected
+              onRemove={() => handleTagRemove(tag._id)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Available Tag Chips - Horizontal Scrollable List */}
       <div className="flex gap-1.5 md:gap-1 overflow-x-auto overflow-y-hidden pb-1 scrollbar-hide">
-        {allTags.length === 0 ? (
+        {availableTags.length === 0 ? (
           <p className="text-xs text-neutral-400 dark:text-neutral-500">
-            No tags found
+            {allTags.length === 0 ? "No tags found" : "All tags selected"}
           </p>
         ) : (
-          allTags.map((tag) => (
-            <div
+          availableTags.map((tag) => (
+            <TagChip
               key={tag._id}
-              className="cursor-pointer transition-transform hover:scale-105"
-            >
-              <TagChip slug={tag.slug.current} name={tag.name} />
-            </div>
+              slug={tag.slug.current}
+              name={tag.name}
+              onClick={() => handleTagSelect(tag._id)}
+            />
           ))
         )}
       </div>
