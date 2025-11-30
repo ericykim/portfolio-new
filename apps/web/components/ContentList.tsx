@@ -52,7 +52,7 @@ export function ContentList<T extends ContentListItem>({
         className={cn(
           "block p-4 md:p-4 border-l-2 md:border-l-2 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-200",
           isActive
-            ? "border-l-blue-500 bg-blue-50 dark:bg-blue-950/20"
+            ? "border-l-blue-500 dark:border-l-blue-400 bg-blue-50 dark:bg-blue-950/40"
             : "border-l-transparent hover:border-l-neutral-300 dark:hover:border-l-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900/50"
         )}
       >
