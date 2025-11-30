@@ -8,7 +8,7 @@ import {
   Camera,
   Headphones,
   Footprints,
-  BookOpen,
+  Bookmark,
   Sun,
   Moon,
   Hammer,
@@ -38,7 +38,7 @@ const personalNavItems: NavItem[] = [
   { href: "/photos", label: "Photos", icon: Camera },
   { href: "/listening", label: "Listening", icon: Headphones },
   { href: "/hikes", label: "Hikes", icon: Footprints },
-  { href: "/bookmarks", label: "Bookmarks", icon: BookOpen },
+  { href: "/bookmarks", label: "Bookmarks", icon: Bookmark },
 ];
 
 export function CollapsibleSidebar() {
