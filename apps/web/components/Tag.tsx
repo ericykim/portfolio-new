@@ -9,58 +9,59 @@ export interface Tag {
 }
 
 // Tag color mapping with Tailwind colors
-const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  design: {
-    bg: "bg-purple-100 dark:bg-purple-950",
-    text: "text-purple-700 dark:text-purple-300",
-    border: "border-purple-500 dark:border-purple-400",
-  },
-  dev: {
-    bg: "bg-blue-100 dark:bg-blue-950",
-    text: "text-blue-700 dark:text-blue-300",
-    border: "border-blue-500 dark:border-blue-400",
-  },
-  list: {
-    bg: "bg-amber-100 dark:bg-amber-950",
-    text: "text-amber-700 dark:text-amber-300",
-    border: "border-amber-500 dark:border-amber-400",
-  },
-  sports: {
-    bg: "bg-green-100 dark:bg-green-950",
-    text: "text-green-700 dark:text-green-300",
-    border: "border-green-500 dark:border-green-400",
-  },
-  project: {
-    bg: "bg-red-100 dark:bg-red-950",
-    text: "text-red-700 dark:text-red-300",
-    border: "border-red-500 dark:border-red-400",
-  },
-  "local-first": {
-    bg: "bg-cyan-100 dark:bg-cyan-950",
-    text: "text-cyan-700 dark:text-cyan-300",
-    border: "border-cyan-500 dark:border-cyan-400",
-  },
-  react: {
-    bg: "bg-sky-100 dark:bg-sky-950",
-    text: "text-sky-700 dark:text-sky-300",
-    border: "border-sky-500 dark:border-sky-400",
-  },
-  "react-native": {
-    bg: "bg-indigo-100 dark:bg-indigo-950",
-    text: "text-indigo-700 dark:text-indigo-300",
-    border: "border-indigo-500 dark:border-indigo-400",
-  },
-  travel: {
-    bg: "bg-pink-100 dark:bg-pink-950",
-    text: "text-pink-700 dark:text-pink-300",
-    border: "border-pink-500 dark:border-pink-400",
-  },
-  "ui/ux": {
-    bg: "bg-purple-100 dark:bg-purple-950",
-    text: "text-purple-700 dark:text-purple-300",
-    border: "border-purple-500 dark:border-purple-400",
-  },
-};
+const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> =
+  {
+    design: {
+      bg: "bg-purple-100 dark:bg-purple-950",
+      text: "text-purple-700 dark:text-purple-300",
+      border: "border-purple-500 dark:border-purple-400",
+    },
+    dev: {
+      bg: "bg-blue-100 dark:bg-blue-950",
+      text: "text-blue-700 dark:text-blue-300",
+      border: "border-blue-500 dark:border-blue-400",
+    },
+    list: {
+      bg: "bg-amber-100 dark:bg-amber-950",
+      text: "text-amber-700 dark:text-amber-300",
+      border: "border-amber-500 dark:border-amber-400",
+    },
+    sports: {
+      bg: "bg-green-100 dark:bg-green-950",
+      text: "text-green-700 dark:text-green-300",
+      border: "border-green-500 dark:border-green-400",
+    },
+    project: {
+      bg: "bg-red-100 dark:bg-red-950",
+      text: "text-red-700 dark:text-red-300",
+      border: "border-red-500 dark:border-red-400",
+    },
+    "local-first": {
+      bg: "bg-cyan-100 dark:bg-cyan-950",
+      text: "text-cyan-700 dark:text-cyan-300",
+      border: "border-cyan-500 dark:border-cyan-400",
+    },
+    react: {
+      bg: "bg-sky-100 dark:bg-sky-950",
+      text: "text-sky-700 dark:text-sky-300",
+      border: "border-sky-500 dark:border-sky-400",
+    },
+    "react-native": {
+      bg: "bg-indigo-100 dark:bg-indigo-950",
+      text: "text-indigo-700 dark:text-indigo-300",
+      border: "border-indigo-500 dark:border-indigo-400",
+    },
+    travel: {
+      bg: "bg-pink-100 dark:bg-pink-950",
+      text: "text-pink-700 dark:text-pink-300",
+      border: "border-pink-500 dark:border-pink-400",
+    },
+    "ui/ux": {
+      bg: "bg-purple-100 dark:bg-purple-950",
+      text: "text-purple-700 dark:text-purple-300",
+      border: "border-purple-500 dark:border-purple-400",
+    },
+  };
 
 interface TagProps {
   slug: string;

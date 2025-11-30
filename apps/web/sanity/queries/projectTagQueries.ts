@@ -11,4 +11,3 @@ export const ALL_PROJECT_TAGS_QUERY = defineQuery(`*[
   name,
   slug
 }`);
-

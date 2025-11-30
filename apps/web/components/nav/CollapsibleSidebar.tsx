@@ -38,7 +38,7 @@ const personalNavItems: NavItem[] = [
   { href: "/photos", label: "Photos", icon: Camera },
   { href: "/listening", label: "Listening", icon: Headphones },
   { href: "/hikes", label: "Hikes", icon: Footprints },
-  { href: "/reads", label: "Good reads", icon: BookOpen },
+  { href: "/bookmarks", label: "Bookmarks", icon: BookOpen },
 ];
 
 export function CollapsibleSidebar() {

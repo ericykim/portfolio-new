@@ -13,7 +13,7 @@ const routeNames: Record<string, string> = {
   "/ama": "AMA",
   "/listening": "Listening",
   "/hikes": "Hikes",
-  "/reads": "Good reads",
+  "/bookmarks": "Bookmarks",
   "/photos": "Photos",
 };
 

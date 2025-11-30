@@ -39,4 +39,3 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`*[
     slug
   }
 }`);
-
