@@ -1,8 +1,8 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-export const postType = defineType({
-  name: 'post',
-  title: 'Post',
+export const projectType = defineType({
+  name: 'project',
+  title: 'Project',
   type: 'document',
   fields: [
     defineField({
@@ -25,8 +25,8 @@ export const postType = defineType({
     defineField({
       name: 'tags',
       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'postTag'}})],
-      description: 'Categories for this post (e.g., Design, Dev, Sports)',
+      of: [defineArrayMember({type: 'reference', to: {type: 'projectTag'}})],
+      description: 'Categories for this project (e.g., Design, Dev, Mobile)',
     }),
     defineField({
       name: 'image',
@@ -39,3 +39,4 @@ export const postType = defineType({
     }),
   ],
 })
+

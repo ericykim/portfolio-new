@@ -1,8 +1,10 @@
 // Export all individual queries
 export * from "./educationQueries";
 export * from "./postQueries";
+export * from "./postTagQueries";
 export * from "./profileQueries";
-export * from "./tagQueries";
+export * from "./projectQueries";
+export * from "./projectTagQueries";
 export * from "./workExperienceQueries";
 
 import { defineQuery } from "next-sanity";

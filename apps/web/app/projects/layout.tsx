@@ -2,26 +2,27 @@ import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
 import { type ContentListItem } from "@/components/ContentList";
 import { type Tag } from "@/components/Tag";
-import { POSTS_QUERY, ALL_POST_TAGS_QUERY } from "@/sanity/queries";
+import { PROJECTS_QUERY, ALL_PROJECT_TAGS_QUERY } from "@/sanity/queries";
 import { ContentLayoutWrapper } from "@/components/ContentLayoutWrapper";
 
 const options = { next: { revalidate: 30 } };
 
-interface PostListItem extends SanityDocument, ContentListItem {}
+interface ProjectListItem extends SanityDocument, ContentListItem {}
 
-export default async function WritingLayout({
+export default async function ProjectsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [posts, tags] = await Promise.all([
-    client.fetch<PostListItem[]>(POSTS_QUERY, {}, options),
-    client.fetch<Tag[]>(ALL_POST_TAGS_QUERY, {}, options),
+  const [projects, tags] = await Promise.all([
+    client.fetch<ProjectListItem[]>(PROJECTS_QUERY, {}, options),
+    client.fetch<Tag[]>(ALL_PROJECT_TAGS_QUERY, {}, options),
   ]);
 
   return (
-    <ContentLayoutWrapper items={posts} basePath="/writing" allTags={tags}>
+    <ContentLayoutWrapper items={projects} basePath="/projects" allTags={tags}>
       {children}
     </ContentLayoutWrapper>
   );
 }
+

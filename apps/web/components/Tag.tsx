@@ -45,6 +45,10 @@ const TAG_COLORS: Record<string, { bg: string; text: string }> = {
     bg: "bg-pink-100 dark:bg-pink-950",
     text: "text-pink-700 dark:text-pink-300",
   },
+  "ui/ux": {
+    bg: "bg-purple-100 dark:bg-purple-950",
+    text: "text-purple-700 dark:text-purple-300",
+  },
 };
 
 interface TagProps {

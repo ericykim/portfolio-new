@@ -1,10 +1,10 @@
-export default function WorkPage() {
+import { EmptyState } from "@/components/EmptyState";
+
+export default function ProjectsPage() {
   return (
-    <div className="w-full overflow-y-auto" data-scroll-container>
-      <div className="p-8 md:p-12">
-        <h1 className="text-4xl font-bold mb-8">Work</h1>
-        <p className="text-neutral-600 dark:text-neutral-400">Coming soon...</p>
-      </div>
-    </div>
+    <EmptyState
+      title="Select a project to view"
+      description="Choose a project from the list to view its content"
+    />
   );
 }
