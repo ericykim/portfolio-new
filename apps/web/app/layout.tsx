@@ -40,9 +40,9 @@ export default function RootLayout({
         className={`${ppTelegraf.variable} ${ppWoodland.variable} antialiased bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100`}
       >
         <Providers>
-          <div className="flex bg-neutral-100 dark:bg-neutral-900">
+          <div className="flex min-h-dvh max-h-dvh min-w-dvw max-w-dvw bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
             <CollapsibleSidebar />
-            <div className="flex-1 transition-[margin,padding] duration-200 p-0 sm:p-4 max-h-dvh max-w-dvw">
+            <div className="flex-1 transition-[margin,padding] duration-200 p-0 sm:p-4 max-h-dvh overflow-hidden">
               <div className="h-full mx-auto bg-white dark:bg-neutral-950 sm:rounded-2xl shadow-sm sm:border border-neutral-200 dark:border-neutral-800 flex flex-col">
                 <PageHeader />
                 <div className="flex flex-1 min-h-0 overflow-hidden">
