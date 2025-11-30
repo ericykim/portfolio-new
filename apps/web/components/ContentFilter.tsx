@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Input } from "@heroui/react";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Tag as TagChip, type Tag } from "./Tag";
 import { useDebouncedCallback } from "@/hooks/useDebouncedCallback";
 
@@ -23,6 +23,11 @@ export function ContentFilter({
     debouncedSearch(value);
   };
 
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    onSearchChange("");
+  };
+
   return (
     <div className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 p-3 md:p-4 space-y-3 md:space-y-4">
       {/* Search Input */}
@@ -33,6 +38,17 @@ export function ContentFilter({
         onChange={(e) => handleSearchChange(e.target.value)}
         startContent={
           <Search className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+        }
+        endContent={
+          searchQuery && (
+            <button
+              onClick={handleClearSearch}
+              className="text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
+              aria-label="Clear search"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )
         }
         classNames={{
           input: "text-sm md:text-xs",
