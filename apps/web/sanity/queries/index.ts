@@ -2,6 +2,7 @@
 export * from "./educationQueries";
 export * from "./postQueries";
 export * from "./profileQueries";
+export * from "./tagQueries";
 export * from "./workExperienceQueries";
 
 import { defineQuery } from "next-sanity";

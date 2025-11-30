@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentList, type ContentListItem } from "./ContentList";
+import { ContentList, type ContentListItem, type Tag } from "./ContentList";
 
 export interface ContentLayoutProps<T extends ContentListItem> {
   items: T[];
@@ -7,6 +7,7 @@ export interface ContentLayoutProps<T extends ContentListItem> {
   activeSlug?: string;
   emptyState?: React.ReactNode;
   children?: React.ReactNode;
+  allTags?: Tag[];
 }
 
 /**
@@ -21,20 +22,24 @@ export function ContentLayout<T extends ContentListItem>({
   activeSlug,
   emptyState,
   children,
+  allTags,
 }: ContentLayoutProps<T>) {
   return (
     <>
       {/* Mobile: Show list when no item selected, show content when item is selected */}
-      <div className="md:hidden w-full" data-scroll-container>
+      <div className="md:hidden w-full h-full flex flex-col">
         {activeSlug ? (
           // Show content when an item is selected
-          <main className="w-full">{children || emptyState}</main>
+          <main className="w-full h-full overflow-y-auto">
+            {children || emptyState}
+          </main>
         ) : (
           // Show list when no item is selected
           <ContentList
             items={items}
             basePath={basePath}
             activeSlug={activeSlug}
+            allTags={allTags}
           />
         )}
       </div>
@@ -42,13 +47,13 @@ export function ContentLayout<T extends ContentListItem>({
       {/* Desktop: Show list + content */}
       <div className="hidden md:flex md:flex-row h-full w-full overflow-hidden">
         {/* Sidebar - 200px fixed on desktop with independent scroll */}
-        <div className="shrink-0 overflow-y-auto">
-          <ContentList
-            items={items}
-            basePath={basePath}
-            activeSlug={activeSlug}
-          />
-        </div>
+
+        <ContentList
+          items={items}
+          basePath={basePath}
+          activeSlug={activeSlug}
+          allTags={allTags}
+        />
 
         {/* Main content area - remaining space on desktop with independent scroll */}
         <main className="flex-1 overflow-y-auto grow" data-scroll-container>

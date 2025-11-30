@@ -2,18 +2,20 @@
 
 import { usePathname } from "next/navigation";
 import { ContentLayout } from "@/components/ContentLayout";
-import { type ContentListItem } from "@/components/ContentList";
+import { type ContentListItem, type Tag } from "@/components/ContentList";
 
 interface ContentLayoutWrapperProps {
   items: ContentListItem[];
   basePath: string;
   children: React.ReactNode;
+  allTags?: Tag[];
 }
 
 export function ContentLayoutWrapper({
   items,
   basePath,
   children,
+  allTags,
 }: ContentLayoutWrapperProps) {
   const pathname = usePathname();
 
@@ -22,7 +24,12 @@ export function ContentLayoutWrapper({
   const activeSlug = slugMatch?.[1];
 
   return (
-    <ContentLayout items={items} basePath={basePath} activeSlug={activeSlug}>
+    <ContentLayout
+      items={items}
+      basePath={basePath}
+      activeSlug={activeSlug}
+      allTags={allTags}
+    >
       {children}
     </ContentLayout>
   );

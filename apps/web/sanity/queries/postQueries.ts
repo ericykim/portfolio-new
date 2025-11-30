@@ -12,7 +12,12 @@ export const POSTS_QUERY = defineQuery(`*[
   slug,
   publishedAt,
   image,
-  body
+  body,
+  tags[]->{
+    _id,
+    name,
+    slug
+  }
 }`);
 
 /**
@@ -27,5 +32,10 @@ export const POST_BY_SLUG_QUERY = defineQuery(`*[
   slug,
   publishedAt,
   image,
-  body
+  body,
+  tags[]->{
+    _id,
+    name,
+    slug
+  }
 }`);

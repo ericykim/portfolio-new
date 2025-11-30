@@ -1,6 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useMemo } from "react";
+import { ContentFilter } from "./ContentFilter";
+
+export interface Tag {
+  _id: string;
+  name: string;
+  slug: { current: string };
+}
 
 export interface ContentListItem {
   _id: string;
@@ -8,6 +16,7 @@ export interface ContentListItem {
   slug: { current: string } | string;
   publishedAt?: string;
   date?: string;
+  tags?: Tag[];
 }
 
 export interface ContentListProps<T extends ContentListItem> {
@@ -15,6 +24,7 @@ export interface ContentListProps<T extends ContentListItem> {
   basePath: string;
   activeSlug?: string;
   renderItem?: (item: T) => React.ReactNode;
+  allTags?: Tag[];
 }
 
 export function ContentList<T extends ContentListItem>({
@@ -22,7 +32,17 @@ export function ContentList<T extends ContentListItem>({
   basePath,
   activeSlug,
   renderItem,
+  allTags,
 }: ContentListProps<T>) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter items by search query
+  const filteredItems = useMemo(() => {
+    if (!searchQuery.trim()) return items;
+    const query = searchQuery.toLowerCase();
+    return items.filter((item) => item.title?.toLowerCase().includes(query));
+  }, [items, searchQuery]);
+
   const defaultRenderItem = (item: T) => {
     const slugCurrent =
       typeof item.slug === "string" ? item.slug : item.slug.current;
@@ -61,25 +81,30 @@ export function ContentList<T extends ContentListItem>({
   return (
     <aside
       className="
-        w-full md:w-[200px] md:min-w-[200px]
-        h-auto md:h-full
-        border-b md:border-b-0 md:border-r
-        border-neutral-200 dark:border-neutral-800
-        bg-white dark:bg-neutral-950
-        md:overflow-y-auto md:overflow-x-hidden scroll-smooth
-        rounded-none md:rounded-bl-2xl
+      flex flex-col h-full
+      w-full md:w-[300px] md:min-w-[200px]
+      border-b md:border-b-0 md:border-r
+      border-neutral-200 dark:border-neutral-800
+      bg-white dark:bg-neutral-950
+      rounded-none md:rounded-bl-2xl
+      overflow-hidden
       "
     >
-      <div>
-        {items.map((item) =>
-          renderItem ? renderItem(item) : defaultRenderItem(item)
-        )}
-      </div>
-      {items.length === 0 && (
-        <div className="p-8 text-center text-neutral-500 dark:text-neutral-400 text-sm">
-          No items to display
+      <ContentFilter allTags={allTags} onSearchChange={setSearchQuery} />
+      <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+        <div className="h-full overflow-y-auto overflow-x-hidden">
+          {filteredItems.map((item) =>
+            renderItem ? renderItem(item) : defaultRenderItem(item)
+          )}
+          {filteredItems.length === 0 && (
+            <div className="p-8 text-center text-neutral-500 dark:text-neutral-400 text-sm">
+              {searchQuery
+                ? "No items match your search"
+                : "No items to display"}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </aside>
   );
 }

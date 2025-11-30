@@ -1,7 +1,7 @@
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import { type ContentListItem } from "@/components/ContentList";
-import { POSTS_QUERY } from "@/sanity/queries";
+import { type ContentListItem, type Tag } from "@/components/ContentList";
+import { POSTS_QUERY, ALL_TAGS_QUERY } from "@/sanity/queries";
 import { ContentLayoutWrapper } from "@/components/ContentLayoutWrapper";
 
 const options = { next: { revalidate: 30 } };
@@ -13,10 +13,13 @@ export default async function WritingLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const posts = await client.fetch<PostListItem[]>(POSTS_QUERY, {}, options);
+  const [posts, tags] = await Promise.all([
+    client.fetch<PostListItem[]>(POSTS_QUERY, {}, options),
+    client.fetch<Tag[]>(ALL_TAGS_QUERY, {}, options),
+  ]);
 
   return (
-    <ContentLayoutWrapper items={posts} basePath="/writing">
+    <ContentLayoutWrapper items={posts} basePath="/writing" allTags={tags}>
       {children}
     </ContentLayoutWrapper>
   );

@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -21,6 +21,12 @@ export const postType = defineType({
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'tags',
+      type: 'array',
+      of: [defineArrayMember({type: 'reference', to: {type: 'tag'}})],
+      description: 'Categories for this post (e.g., Design, Dev, Sports)',
     }),
     defineField({
       name: 'image',
