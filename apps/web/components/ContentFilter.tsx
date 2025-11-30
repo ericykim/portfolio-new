@@ -45,9 +45,10 @@ export function ContentFilter({
     onTagsChange(newSelectedTags);
   };
 
-  const selectedTags = allTags.filter((tag) =>
-    selectedTagIds.includes(tag._id)
-  );
+  // Preserve the order tags were selected by mapping selectedTagIds to tags
+  const selectedTags = selectedTagIds
+    .map((id) => allTags.find((tag) => tag._id === id))
+    .filter((tag): tag is Tag => tag !== undefined);
   const availableTags = allTags.filter(
     (tag) => !selectedTagIds.includes(tag._id)
   );
