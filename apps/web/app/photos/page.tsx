@@ -21,6 +21,7 @@ interface Photo {
   caption?: string;
   dateTaken?: string;
   uploadedAt: string;
+  hideFromGallery?: boolean;
   albums?: Array<{
     _id: string;
     name: string;

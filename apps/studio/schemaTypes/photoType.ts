@@ -38,9 +38,10 @@ export const photoType = defineType({
     }),
     defineField({
       name: 'hideFromGallery',
-      title: 'Hide from Photos Page',
+      title: 'Hide from All Photos View',
       type: 'boolean',
-      description: 'Check this to prevent this photo from appearing on the photos page',
+      description:
+        'Check this to hide from the "All Photos" view. Photo will still appear in albums.',
       initialValue: false,
     }),
     defineField({

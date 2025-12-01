@@ -26,6 +26,7 @@ interface Photo {
   caption?: string;
   dateTaken?: string;
   uploadedAt: string;
+  hideFromGallery?: boolean;
   albums?: Array<{
     _id: string;
     name: string;
@@ -61,11 +62,14 @@ export function PhotosContent({
   // Filter photos based on current view
   const displayedPhotos = useMemo(() => {
     if (currentAlbum) {
+      // When viewing an album, show ALL photos in that album (including hidden ones)
       return photos.filter((photo) =>
         photo.albums?.some((a) => a._id === currentAlbum._id)
       );
     }
-    return photos;
+    // When viewing "All Photos", hide photos marked as hideFromGallery
+    // (Query already filters most of these out, but we filter again for photos in albums)
+    return photos.filter((photo) => !photo.hideFromGallery);
   }, [currentAlbum, photos]);
 
   // Calculate lightbox index from URL
