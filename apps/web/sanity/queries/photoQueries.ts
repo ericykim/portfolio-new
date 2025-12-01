@@ -40,4 +40,3 @@ export const PHOTOS_BY_ALBUM_QUERY = defineQuery(`*[
     slug
   }
 }`);
-

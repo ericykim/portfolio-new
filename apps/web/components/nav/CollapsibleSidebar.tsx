@@ -30,7 +30,7 @@ interface NavItem {
 const mainNavItems: NavItem[] = [{ href: "/", label: "Home", icon: Home }];
 
 const craftNavItems: NavItem[] = [
-  { href: "/writing", label: "Writing", icon: FileText },
+  { href: "/posts", label: "Posts", icon: FileText },
   { href: "/projects", label: "Projects", icon: Hammer },
 ];
 

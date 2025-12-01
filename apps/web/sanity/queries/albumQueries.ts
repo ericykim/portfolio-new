@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 /**
- * Query for fetching all albums with photo count
+ * Query for fetching all albums with photo count and preview images
  * Ordered by creation date (newest first)
  */
 export const ALBUMS_QUERY = defineQuery(`*[
@@ -13,7 +13,8 @@ export const ALBUMS_QUERY = defineQuery(`*[
   description,
   coverImage,
   createdAt,
-  "photoCount": count(*[_type == "photo" && references(^._id)])
+  "photoCount": count(*[_type == "photo" && references(^._id)]),
+  "previewImages": *[_type == "photo" && references(^._id)] | order(coalesce(dateTaken, uploadedAt) desc)[0...3].image
 }`);
 
 /**
