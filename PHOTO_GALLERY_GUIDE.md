@@ -187,3 +187,4 @@ apps/
 - Uses Tailwind CSS for styling
 - Client components where interactivity is needed
 - Server components for data fetching when possible
+

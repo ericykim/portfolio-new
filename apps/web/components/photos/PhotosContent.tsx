@@ -101,13 +101,13 @@ export function PhotosContent({
   const handlePhotoClick = (index: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("photo", displayedPhotos[index]._id);
+    // Use push() to create a history entry so back button closes the lightbox
     router.push(`/photos?${params.toString()}`, { scroll: false });
   };
 
   const handleCloseLightbox = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("photo");
-    router.push(`/photos?${params.toString()}`, { scroll: false });
+    // Use back() to go back in history, which removes the lightbox
+    router.back();
   };
 
   const handleNextPhoto = () => {
@@ -115,7 +115,8 @@ export function PhotosContent({
     const newIndex = Math.min(lightboxIndex + 1, displayedPhotos.length - 1);
     const params = new URLSearchParams(searchParams.toString());
     params.set("photo", displayedPhotos[newIndex]._id);
-    router.push(`/photos?${params.toString()}`, { scroll: false });
+    // Use replace() so navigating between photos doesn't create history entries
+    router.replace(`/photos?${params.toString()}`, { scroll: false });
   };
 
   const handlePreviousPhoto = () => {
@@ -123,7 +124,8 @@ export function PhotosContent({
     const newIndex = Math.max(lightboxIndex - 1, 0);
     const params = new URLSearchParams(searchParams.toString());
     params.set("photo", displayedPhotos[newIndex]._id);
-    router.push(`/photos?${params.toString()}`, { scroll: false });
+    // Use replace() so navigating between photos doesn't create history entries
+    router.replace(`/photos?${params.toString()}`, { scroll: false });
   };
 
   const isAlbumsView = view === "albums" && !currentAlbum;
