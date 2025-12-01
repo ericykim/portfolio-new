@@ -1,6 +1,6 @@
 import { EmptyState } from "@/components/EmptyState";
 
-export default function WritingPage() {
+export default function PostsPage() {
   return (
     <EmptyState
       title="Select a post to read"

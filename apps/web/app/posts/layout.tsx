@@ -9,7 +9,7 @@ const options = { next: { revalidate: 30 } };
 
 interface PostListItem extends SanityDocument, ContentListItem {}
 
-export default async function WritingLayout({
+export default async function PostLayout({
   children,
 }: {
   children: React.ReactNode;
