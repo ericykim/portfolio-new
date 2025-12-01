@@ -7,10 +7,8 @@ import { useSidebar } from "@/context/SidebarContext";
 
 const routeNames: Record<string, string> = {
   "/": "Home",
-  "/writing": "Writing",
+  "/posts": "Posts",
   "/projects": "Projects",
-  "/demo": "Demo",
-  "/ama": "AMA",
   "/listening": "Listening",
   "/hikes": "Hikes",
   "/bookmarks": "Bookmarks",

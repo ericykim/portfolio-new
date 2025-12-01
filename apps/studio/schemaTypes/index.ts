@@ -1,4 +1,6 @@
+import {albumType} from './albumType'
 import {educationType} from './educationType'
+import {photoType} from './photoType'
 import {postTagType} from './postTagType'
 import {postType} from './postType'
 import {profileType} from './profileType'
@@ -14,4 +16,6 @@ export const schemaTypes = [
   profileType,
   workExperienceType,
   educationType,
+  albumType,
+  photoType,
 ]
