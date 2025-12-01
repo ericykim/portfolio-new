@@ -7,14 +7,16 @@ import {
   FileText,
   Camera,
   Headphones,
-  Footprints,
+  AppWindow,
   Bookmark,
   Sun,
   Moon,
   Hammer,
   Linkedin,
   Github,
+  Instagram,
   ChevronsLeft,
+  Sparkles,
 } from "lucide-react";
 import { useSidebar } from "@/context/SidebarContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -32,12 +34,13 @@ const mainNavItems: NavItem[] = [{ href: "/", label: "Home", icon: Home }];
 const craftNavItems: NavItem[] = [
   { href: "/posts", label: "Posts", icon: FileText },
   { href: "/projects", label: "Projects", icon: Hammer },
+  { href: "/playground", label: "Playground", icon: Sparkles },
 ];
 
 const personalNavItems: NavItem[] = [
   { href: "/photos", label: "Photos", icon: Camera },
   { href: "/listening", label: "Listening", icon: Headphones },
-  { href: "/hikes", label: "Hikes", icon: Footprints },
+  { href: "/apps", label: "Apps I'm Using", icon: AppWindow },
   { href: "/bookmarks", label: "Bookmarks", icon: Bookmark },
 ];
 
@@ -148,6 +151,19 @@ export function CollapsibleSidebar() {
             <div className="h-6 w-px bg-neutral-200 dark:bg-neutral-800" />
 
             <div className="flex items-center gap-2">
+              <Button
+                as="a"
+                href="https://www.instagram.com/lens.eric/"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="light"
+                isIconOnly
+                className="flex-shrink-0"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-[18px] h-[18px]" strokeWidth={2} />
+              </Button>
+
               <Button
                 as="a"
                 href="https://www.linkedin.com/in/erickimdev"

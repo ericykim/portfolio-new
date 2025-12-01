@@ -33,7 +33,7 @@ export default async function PostPage({
   return (
     <div className="container mx-auto max-w-3xl p-8 flex flex-col gap-4">
       <Link
-        href="/writing"
+        href="/posts"
         className="hover:underline text-neutral-600 dark:text-neutral-400 sm:hidden"
       >
         ← Back to posts

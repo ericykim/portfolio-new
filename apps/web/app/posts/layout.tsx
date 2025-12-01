@@ -20,7 +20,7 @@ export default async function PostLayout({
   ]);
 
   return (
-    <ContentLayoutWrapper items={posts} basePath="/writing" allTags={tags}>
+    <ContentLayoutWrapper items={posts} basePath="/posts" allTags={tags}>
       {children}
     </ContentLayoutWrapper>
   );

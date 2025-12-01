@@ -9,8 +9,9 @@ const routeNames: Record<string, string> = {
   "/": "Home",
   "/posts": "Posts",
   "/projects": "Projects",
+  "/playground": "Playground",
   "/listening": "Listening",
-  "/hikes": "Hikes",
+  "/apps": "Apps I'm Using",
   "/bookmarks": "Bookmarks",
   "/photos": "Photos",
 };

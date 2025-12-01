@@ -1,10 +1,11 @@
-export default function HikesPage() {
+export default function PlaygroundPage() {
   return (
     <div className="w-full overflow-y-auto" data-scroll-container>
       <div className="p-8 sm:p-12">
-        <h1 className="text-4xl font-bold mb-8">Hikes</h1>
+        <h1 className="text-4xl font-bold mb-8">Playground</h1>
         <p className="text-neutral-600 dark:text-neutral-400">Coming soon...</p>
       </div>
     </div>
   );
 }
+
