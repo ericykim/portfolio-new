@@ -40,4 +40,3 @@ export const ALBUM_BY_SLUG_QUERY = defineQuery(`*[
     uploadedAt
   }
 }`);
-

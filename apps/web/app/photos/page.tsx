@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { client } from "@/sanity/client";
 import { ALBUMS_QUERY, PHOTOS_QUERY } from "@/sanity/queries";
 import { PhotosContent } from "@/components/photos/PhotosContent";
@@ -34,5 +35,9 @@ export default async function PhotosPage() {
     client.fetch<Photo[]>(PHOTOS_QUERY),
   ]);
 
-  return <PhotosContent initialAlbums={albums} initialPhotos={photos} />;
+  return (
+    <Suspense fallback={<div className="p-6 md:p-12">Loading...</div>}>
+      <PhotosContent initialAlbums={albums} initialPhotos={photos} />
+    </Suspense>
+  );
 }
