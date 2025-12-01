@@ -37,6 +37,13 @@ export const photoType = defineType({
       description: 'Albums this photo belongs to',
     }),
     defineField({
+      name: 'hideFromGallery',
+      title: 'Hide from Photos Page',
+      type: 'boolean',
+      description: 'Check this to prevent this photo from appearing on the photos page',
+      initialValue: false,
+    }),
+    defineField({
       name: 'uploadedAt',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),

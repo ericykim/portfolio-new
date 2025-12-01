@@ -3,9 +3,11 @@ import { defineQuery } from "next-sanity";
 /**
  * Query for fetching all photos with album references
  * Ordered by date taken (newest first), falls back to upload date if dateTaken is null
+ * Excludes photos where hideFromGallery is true
  */
 export const PHOTOS_QUERY = defineQuery(`*[
   _type == "photo"
+  && hideFromGallery != true
 ] | order(coalesce(dateTaken, uploadedAt) desc){
   _id,
   image,
