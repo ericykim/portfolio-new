@@ -81,7 +81,7 @@ export function Tag({ slug, name, isSelected, onRemove, onClick }: TagProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs md:text-[10px] font-medium shrink-0 transition-all whitespace-nowrap",
+        "inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-[10px] font-medium shrink-0 transition-all whitespace-nowrap",
         colors.bg,
         colors.text,
         isSelected && `border-2 ${colors.border}`,
@@ -100,7 +100,7 @@ export function Tag({ slug, name, isSelected, onRemove, onClick }: TagProps) {
           className="hover:opacity-70 transition-opacity"
           aria-label={`Remove ${name} tag`}
         >
-          <X className="w-3 h-3 md:w-2.5 md:h-2.5" />
+          <X className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
         </button>
       )}
     </span>

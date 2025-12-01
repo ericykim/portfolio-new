@@ -64,7 +64,7 @@ export function MasonryGallery({ photos, onPhotoClick }: MasonryGalleryProps) {
   return (
     <div
       ref={masonryContainer}
-      className="grid items-start grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6"
+      className="grid items-start grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6"
     >
       {photos.map((photo, index) => {
         const dimensions = getSanityImageDimensions(photo.image);

@@ -54,7 +54,7 @@ export function ContentFilter({
   );
 
   return (
-    <div className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 p-3 md:p-4 space-y-3 md:space-y-4">
+    <div className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 p-3 sm:p-4 space-y-3 sm:space-y-4">
       {/* Search Input */}
       <Input
         type="text"
@@ -76,9 +76,9 @@ export function ContentFilter({
           )
         }
         classNames={{
-          input: "text-sm md:text-xs",
+          input: "text-sm sm:text-xs",
           inputWrapper:
-            "h-9 md:h-8 bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800",
+            "h-9 sm:h-8 bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800",
         }}
         size="sm"
         radius="md"
@@ -86,7 +86,7 @@ export function ContentFilter({
 
       {/* Selected Tags - Wrapping List */}
       {selectedTags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 md:gap-1">
+        <div className="flex flex-wrap gap-1.5 sm:gap-1">
           {selectedTags.map((tag) => (
             <TagChip
               key={tag._id}
@@ -100,7 +100,7 @@ export function ContentFilter({
       )}
 
       {/* Available Tag Chips - Horizontal Scrollable List */}
-      <div className="flex gap-1.5 md:gap-1 overflow-x-auto overflow-y-hidden pb-1 scrollbar-hide">
+      <div className="flex gap-1.5 sm:gap-1 overflow-x-auto overflow-y-hidden pb-1 scrollbar-hide">
         {availableTags.length === 0 ? (
           <p className="text-xs text-neutral-400 dark:text-neutral-500">
             {allTags.length === 0 ? "No tags found" : "All tags selected"}

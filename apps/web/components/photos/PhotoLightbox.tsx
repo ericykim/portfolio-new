@@ -105,7 +105,7 @@ export function PhotoLightbox({
 
       {/* Image Container */}
       <div
-        className="flex flex-col justify-end h-full p-4 pt-16 md:p-16"
+        className="flex flex-col justify-end h-full p-4 pt-16 sm:p-16"
         onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -165,7 +165,7 @@ export function PhotoLightbox({
 
             {/* Photo Metadata */}
             <div className="text-white text-left">
-              <h2 className="text-xl md:text-2xl font-semibold mb-2">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-2">
                 {currentPhoto.title}
               </h2>
               <div className="min-h-[24px] mb-2">

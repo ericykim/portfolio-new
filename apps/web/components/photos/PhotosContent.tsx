@@ -130,7 +130,7 @@ export function PhotosContent({
 
   return (
     <div className="w-full overflow-y-auto bg-white dark:bg-neutral-950">
-      <div className="p-6 md:p-12 max-w-[1920px] mx-auto">
+      <div className="p-6 sm:p-12 max-w-[1920px] mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-row items-center justify-between gap-4 mb-6">
@@ -146,7 +146,7 @@ export function PhotosContent({
                   Back to Albums
                 </Button>
               )}
-              <h1 className="text-4xl md:text-5xl font-bold mb-2">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-2">
                 {currentAlbum
                   ? currentAlbum.name
                   : view === "albums"
@@ -175,7 +175,7 @@ export function PhotosContent({
                   title={
                     <div className="flex items-center gap-2">
                       <ImageIcon className="w-4 h-4" />
-                      <span className="hidden md:inline">All Photos</span>
+                      <span className="hidden sm:inline">All Photos</span>
                     </div>
                   }
                 />
@@ -184,26 +184,11 @@ export function PhotosContent({
                   title={
                     <div className="flex items-center gap-2">
                       <FolderOpen className="w-4 h-4" />
-                      <span className="hidden md:inline">Albums</span>
+                      <span className="hidden sm:inline">Albums</span>
                     </div>
                   }
                 />
               </Tabs>
-            )}
-          </div>
-
-          {/* Stats */}
-          <div className="flex gap-6 text-sm text-neutral-600 dark:text-neutral-400">
-            {isAlbumsView && (
-              <p>
-                {albums.length} {albums.length === 1 ? "album" : "albums"}
-              </p>
-            )}
-            {!isAlbumsView && (
-              <p>
-                {displayedPhotos.length}{" "}
-                {displayedPhotos.length === 1 ? "photo" : "photos"}
-              </p>
             )}
           </div>
         </div>

@@ -37,7 +37,7 @@ export default async function PhotosPage() {
   ]);
 
   return (
-    <Suspense fallback={<div className="p-6 md:p-12">Loading...</div>}>
+    <Suspense fallback={<div className="p-6 sm:p-12">Loading...</div>}>
       <PhotosContent initialAlbums={albums} initialPhotos={photos} />
     </Suspense>
   );

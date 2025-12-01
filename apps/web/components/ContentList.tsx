@@ -70,7 +70,7 @@ export function ContentList<T extends ContentListItem>({
         href={`${basePath}/${slugCurrent}`}
         key={item._id}
         className={cn(
-          "block p-4 md:p-4 border-l-2 md:border-l-2 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-200",
+          "block p-4 sm:p-4 border-l-2 sm:border-l-2 border-b border-neutral-200 dark:border-neutral-800 transition-all duration-200",
           isActive
             ? "border-l-blue-500 dark:border-l-blue-400 bg-blue-50 dark:bg-blue-950/40"
             : "border-l-transparent hover:border-l-neutral-300 dark:hover:border-l-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-900/50"
@@ -78,11 +78,11 @@ export function ContentList<T extends ContentListItem>({
       >
         {/* Title and Date Row */}
         <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="text-base md:text-sm font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-2 flex-1">
+          <h3 className="text-base sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-2 flex-1">
             {item.title || "Untitled"}
           </h3>
           {date && (
-            <p className="text-sm md:text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap shrink-0">
+            <p className="text-sm sm:text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap shrink-0">
               {new Date(date).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",

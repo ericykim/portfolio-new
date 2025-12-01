@@ -27,10 +27,10 @@ export function AlbumFolder({ album, onClick }: AlbumFolderProps) {
     <Button
       onPress={onClick}
       variant="light"
-      className="group flex flex-col items-center gap-6 p-6 md:p-8 rounded-lg h-auto data-[hover=true]:bg-neutral-100 dark:data-[hover=true]:bg-neutral-800 overflow-visible"
+      className="group flex flex-col items-center gap-6 p-6 sm:p-8 rounded-lg h-auto data-[hover=true]:bg-neutral-100 dark:data-[hover=true]:bg-neutral-800 overflow-visible"
     >
       {/* Image Stack */}
-      <div className="relative w-32 h-32 md:w-40 md:h-40 overflow-visible">
+      <div className="relative w-32 h-32 sm:w-40 sm:h-40 overflow-visible">
         {hasPreviewImages ? (
           <div className="relative w-full h-full overflow-visible">
             {previewImages.map((image, index) => {
@@ -52,9 +52,9 @@ export function AlbumFolder({ album, onClick }: AlbumFolderProps) {
                       relative w-full h-full rounded-lg overflow-hidden 
                       shadow-lg
                       bg-white dark:bg-neutral-800 transition-all duration-300 ease-out origin-bottom
-                      ${index === 0 ? "group-hover:transform-[rotate(18deg)_translate(-16px,0px)] group-hover:md:transform-[rotate(20deg)_translate(-24px,0px)]" : ""}
-                      ${index === 1 ? "group-hover:transform-[rotate(2deg)_translate(0px,0px)] group-hover:md:transform-[rotate(2deg)_translate(0px,0px)]" : ""}
-                      ${index === 2 ? "group-hover:transform-[rotate(-18deg)_translate(16px,0px)] group-hover:md:transform-[rotate(-20deg)_translate(24px,0px)]" : ""}
+                      ${index === 0 ? "group-hover:transform-[rotate(18deg)_translate(-16px,0px)] group-hover:sm:transform-[rotate(20deg)_translate(-24px,0px)]" : ""}
+                      ${index === 1 ? "group-hover:transform-[rotate(2deg)_translate(0px,0px)] group-hover:sm:transform-[rotate(2deg)_translate(0px,0px)]" : ""}
+                      ${index === 2 ? "group-hover:transform-[rotate(-18deg)_translate(16px,0px)] group-hover:sm:transform-[rotate(-20deg)_translate(24px,0px)]" : ""}
                       group-hover:shadow-2xl
                     `}
                   >
@@ -82,7 +82,7 @@ export function AlbumFolder({ album, onClick }: AlbumFolderProps) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              className="w-12 h-12 md:w-16 md:h-16 text-neutral-400"
+              className="w-12 h-12 sm:w-16 sm:h-16 text-neutral-400"
             >
               <rect
                 x="3"
@@ -102,7 +102,7 @@ export function AlbumFolder({ album, onClick }: AlbumFolderProps) {
 
       {/* Album Name */}
       <div className="text-center">
-        <p className="text-sm md:text-base font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2">
+        <p className="text-sm sm:text-base font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2">
           {album.name}
         </p>
         <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
