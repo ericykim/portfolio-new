@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { cn } from "@heroui/react";
 import { ContentFilter } from "./ContentFilter";
 import { Tag as TagChip, type Tag } from "./Tag";
+import { useURLStringState, useURLArrayState } from "@/hooks/useURLState";
+import { useScrollRestoration } from "@/hooks/useScrollRestoration";
 
 export interface ContentListItem {
   _id: string;
@@ -30,8 +32,18 @@ export function ContentList<T extends ContentListItem>({
   renderItem,
   allTags,
 }: ContentListProps<T>) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
+  // Manage URL state for search and tags
+  const [searchQuery, setSearchQuery] = useURLStringState(basePath, "search");
+  const [selectedTagIds, setSelectedTagIds] = useURLArrayState(
+    basePath,
+    "tags"
+  );
+
+  // Manage scroll position restoration
+  const scrollContainerRef = useScrollRestoration({
+    storageKey: `${basePath}-scroll-position`,
+    enabled: !activeSlug, // Only restore when viewing the list
+  });
 
   // Filter items by search query and selected tags
   const filteredItems = useMemo(() => {
@@ -123,10 +135,15 @@ export function ContentList<T extends ContentListItem>({
     >
       <ContentFilter
         allTags={allTags}
+        searchQuery={searchQuery}
+        selectedTagIds={selectedTagIds}
         onSearchChange={setSearchQuery}
         onTagsChange={setSelectedTagIds}
       />
-      <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-white dark:bg-neutral-950">
+      <div
+        ref={scrollContainerRef}
+        className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-white dark:bg-neutral-950"
+      >
         {filteredItems.map((item) =>
           renderItem ? renderItem(item) : defaultRenderItem(item)
         )}

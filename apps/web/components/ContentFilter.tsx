@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Input } from "@heroui/react";
 import { Search, X } from "lucide-react";
 import { Tag as TagChip, type Tag } from "./Tag";
@@ -8,26 +7,28 @@ import { useDebouncedCallback } from "@/hooks/useDebouncedCallback";
 
 interface ContentFilterProps {
   allTags?: Tag[];
+  searchQuery: string;
+  selectedTagIds: string[];
   onSearchChange: (query: string) => void;
   onTagsChange: (tagIds: string[]) => void;
 }
 
 export function ContentFilter({
   allTags = [],
+  searchQuery,
+  selectedTagIds,
   onSearchChange,
   onTagsChange,
 }: ContentFilterProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
   const debouncedSearch = useDebouncedCallback(onSearchChange, 300);
 
   const handleSearchChange = (value: string) => {
-    setSearchQuery(value);
+    // Call both immediate (for UI) and debounced (for URL/filtering)
+    onSearchChange(value);
     debouncedSearch(value);
   };
 
   const handleClearSearch = () => {
-    setSearchQuery("");
     onSearchChange("");
   };
 
@@ -35,13 +36,11 @@ export function ContentFilter({
     const newSelectedTags = selectedTagIds.includes(tagId)
       ? selectedTagIds.filter((id) => id !== tagId)
       : [...selectedTagIds, tagId];
-    setSelectedTagIds(newSelectedTags);
     onTagsChange(newSelectedTags);
   };
 
   const handleTagRemove = (tagId: string) => {
     const newSelectedTags = selectedTagIds.filter((id) => id !== tagId);
-    setSelectedTagIds(newSelectedTags);
     onTagsChange(newSelectedTags);
   };
 
