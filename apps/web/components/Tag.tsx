@@ -61,6 +61,11 @@ const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> =
       text: "text-purple-700 dark:text-purple-300",
       border: "border-purple-500 dark:border-purple-400",
     },
+    thoughts: {
+      bg: "bg-gray-100 dark:bg-gray-800",
+      text: "text-gray-700 dark:text-gray-300",
+      border: "border-gray-500 dark:border-gray-400",
+    },
   };
 
 interface TagProps {
