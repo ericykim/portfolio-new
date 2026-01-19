@@ -4,10 +4,25 @@ import { urlFor } from "@/utils/sanityImage";
 
 interface PortableTextImageValue {
   asset?: {
-    _ref: string;
+    _ref?: string;
+    _id?: string;
+    url?: string;
   };
   alt?: string;
   caption?: string;
+}
+
+function getImageUrl(value: PortableTextImageValue): string | null {
+  // If asset has a direct URL (expanded with asset->), use it with transformations
+  if (value.asset?.url) {
+    // Use urlFor which handles both references and expanded assets
+    return urlFor(value).width(1200).auto("format").url();
+  }
+  // If asset has a _ref (reference), use urlFor
+  if (value.asset?._ref) {
+    return urlFor(value).width(1200).auto("format").url();
+  }
+  return null;
 }
 
 export const portableTextComponents = {
@@ -17,7 +32,9 @@ export const portableTextComponents = {
   // Handle images in portable text
   types: {
     image: ({ value }: { value: PortableTextImageValue }) => {
-      if (!value?.asset?._ref) {
+      const imageUrl = getImageUrl(value);
+      
+      if (!imageUrl) {
         return null;
       }
 
@@ -25,7 +42,7 @@ export const portableTextComponents = {
         <figure className="my-8">
           <div className="relative w-full overflow-hidden rounded-lg">
             <Image
-              src={urlFor(value).width(1200).auto("format").url()}
+              src={imageUrl}
               alt={value.alt || ""}
               width={1200}
               height={800}
