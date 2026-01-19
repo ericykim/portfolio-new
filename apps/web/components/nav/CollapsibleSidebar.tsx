@@ -46,13 +46,13 @@ const personalNavItems: NavItem[] = [
 
 export function CollapsibleSidebar() {
   const pathname = usePathname();
-  const { isOpen, toggle, close } = useSidebar();
+  const { isOpen, toggle, close, hasInteracted } = useSidebar();
   const { theme, toggleTheme } = useTheme();
 
   return (
     <>
-      {/* Backdrop overlay on mobile only */}
-      {isOpen && (
+      {/* Backdrop overlay on mobile only - only show after user has interacted */}
+      {hasInteracted && isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm sm:hidden"
           onClick={close}
@@ -64,7 +64,6 @@ export function CollapsibleSidebar() {
         className={cn(
           `
           fixed sm:relative z-50 sm:z-0
-          transition-[width,transform] duration-200 ease-in-out
           bg-neutral-100 dark:bg-neutral-900
           overflow-hidden
           
@@ -74,7 +73,13 @@ export function CollapsibleSidebar() {
           rounded-2xl sm:rounded-none
           shadow-xl sm:shadow-none
         `,
-          isOpen ? "w-56" : "w-0"
+          // Only animate after user has interacted
+          hasInteracted && "transition-[width,transform] duration-200 ease-in-out",
+          // CSS-based initial state: closed on mobile, open on desktop
+          // After interaction, JS state takes over
+          hasInteracted
+            ? (isOpen ? "w-56" : "w-0")
+            : "w-0 sm:w-56"
         )}
       >
         <div className="flex flex-col h-full sm:h-dvh w-56 p-0 sm:py-4 sm:pl-4">

@@ -15,6 +15,7 @@ interface SidebarContextType {
   toggle: () => void;
   open: () => void;
   close: () => void;
+  hasInteracted: boolean;
 }
 
 const SidebarContext = createContext<SidebarContextType>({
@@ -22,58 +23,44 @@ const SidebarContext = createContext<SidebarContextType>({
   toggle: () => {},
   open: () => {},
   close: () => {},
+  hasInteracted: false,
 });
 
 export const useSidebar = () => useContext(SidebarContext);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  // Start closed to match server-side rendering
-  const [isOpen, setIsOpen] = useState(false);
+  // Default to true (open) - CSS will handle initial visibility per screen size
+  const [isOpen, setIsOpen] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const pathname = usePathname();
 
   const toggle = () => {
+    setHasInteracted(true);
     setIsOpen((prev) => !prev);
   };
 
   const open = () => {
+    setHasInteracted(true);
     setIsOpen(true);
   };
 
   const close = () => {
+    setHasInteracted(true);
     setIsOpen(false);
   };
 
-  // Open sidebar based on initial screen size (desktop OR mobile) after hydration
-  // This only runs once on mount and won't trigger on resize
-  useEffect(() => {
-    const openMenuOnInitialLoad = () => {
-      const isDesktop = window.innerWidth >= SM_BREAKPOINT;
-      const isMobile = window.innerWidth < SM_BREAKPOINT;
-
-      // Open on desktop OR mobile during initial mount
-      if (isDesktop || isMobile) {
-        open();
-      }
-    };
-
-    openMenuOnInitialLoad();
-  }, []);
-
-  // Close sidebar on mobile when route changes
+  // Close sidebar on mobile when route changes (only after user has interacted)
   useEffect(() => {
     const isMobile = window.innerWidth < SM_BREAKPOINT;
-    if (isMobile) {
+    if (isMobile && hasInteracted) {
       startTransition(() => {
-        setIsOpen((prev) => {
-          if (prev) return false;
-          return prev;
-        });
+        setIsOpen(false);
       });
     }
-  }, [pathname]);
+  }, [pathname, hasInteracted]);
 
   return (
-    <SidebarContext.Provider value={{ isOpen, toggle, open, close }}>
+    <SidebarContext.Provider value={{ isOpen, toggle, open, close, hasInteracted }}>
       {children}
     </SidebarContext.Provider>
   );

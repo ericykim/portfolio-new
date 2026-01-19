@@ -18,7 +18,7 @@ const routeNames: Record<string, string> = {
 
 export function PageHeader() {
   const pathname = usePathname();
-  const { toggle, isOpen } = useSidebar();
+  const { toggle, isOpen, hasInteracted } = useSidebar();
 
   // Get the page name from the route map
   // For slug pages, use the parent route
@@ -35,19 +35,26 @@ export function PageHeader() {
 
   return (
     <div className="sticky top-0 z-10 bg-white sm:rounded-t-2xl dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 flex flex-row flex-shrink-0 items-center justify-start gap-2 min-h-[60px] px-2 sm:px-6">
-      {!isOpen && (
-        <Button
-          isIconOnly
-          aria-label="Open menu"
-          color="default"
-          variant="light"
-          size="md"
-          onClick={toggle}
-          className="text-neutral-900 dark:text-neutral-100"
-        >
-          <Menu className="w-[18px] h-[18px]" />
-        </Button>
-      )}
+      {/* 
+        Menu button visibility:
+        - Before interaction: show on mobile only (sm:hidden) - sidebar is CSS-hidden on mobile
+        - After interaction: show when sidebar is closed (!isOpen)
+      */}
+      <Button
+        isIconOnly
+        aria-label="Open menu"
+        color="default"
+        variant="light"
+        size="md"
+        onClick={toggle}
+        className={`text-neutral-900 dark:text-neutral-100 ${
+          hasInteracted
+            ? isOpen ? "hidden" : "flex"
+            : "flex sm:hidden"
+        }`}
+      >
+        <Menu className="w-[18px] h-[18px]" />
+      </Button>
       <h1 className="text-xl font-semibold leading-none h-[15px]">
         {pageName}
       </h1>
