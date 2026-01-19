@@ -5,6 +5,7 @@ import {
   useContext,
   useState,
   useEffect,
+  useRef,
   startTransition,
 } from "react";
 import { usePathname } from "next/navigation";
@@ -15,52 +16,72 @@ interface SidebarContextType {
   toggle: () => void;
   open: () => void;
   close: () => void;
-  hasInteracted: boolean;
+  hasMounted: boolean;
 }
 
 const SidebarContext = createContext<SidebarContextType>({
-  isOpen: true,
+  isOpen: false,
   toggle: () => {},
   open: () => {},
   close: () => {},
-  hasInteracted: false,
+  hasMounted: false,
 });
 
 export const useSidebar = () => useContext(SidebarContext);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  // Default to true (open) - CSS will handle initial visibility per screen size
-  const [isOpen, setIsOpen] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  // Start with false on both server and client to avoid hydration mismatch
+  // CSS handles the correct visual state before JS takes over
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
+  
+  // Track when sidebar was last opened to prevent immediate close
+  const lastOpenTime = useRef<number>(0);
+
+  // After mount, sync state with actual viewport
+  useEffect(() => {
+    const isDesktop = window.innerWidth >= SM_BREAKPOINT;
+    setIsOpen(isDesktop);
+    setHasMounted(true);
+  }, []);
 
   const toggle = () => {
-    setHasInteracted(true);
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => {
+      const newValue = !prev;
+      if (newValue) {
+        lastOpenTime.current = Date.now();
+      }
+      return newValue;
+    });
   };
 
   const open = () => {
-    setHasInteracted(true);
+    lastOpenTime.current = Date.now();
     setIsOpen(true);
   };
 
   const close = () => {
-    setHasInteracted(true);
+    // Prevent closing within 100ms of opening (prevents backdrop click race condition)
+    if (Date.now() - lastOpenTime.current < 100) {
+      return;
+    }
     setIsOpen(false);
   };
 
-  // Close sidebar on mobile when route changes (only after user has interacted)
+  // Close sidebar on mobile when route changes
   useEffect(() => {
+    if (!hasMounted) return;
     const isMobile = window.innerWidth < SM_BREAKPOINT;
-    if (isMobile && hasInteracted) {
+    if (isMobile) {
       startTransition(() => {
         setIsOpen(false);
       });
     }
-  }, [pathname, hasInteracted]);
+  }, [pathname, hasMounted]);
 
   return (
-    <SidebarContext.Provider value={{ isOpen, toggle, open, close, hasInteracted }}>
+    <SidebarContext.Provider value={{ isOpen, toggle, open, close, hasMounted }}>
       {children}
     </SidebarContext.Provider>
   );

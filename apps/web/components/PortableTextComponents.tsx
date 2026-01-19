@@ -29,9 +29,6 @@ export const portableTextComponents = {
         href.includes("localhost");
       
       const isExternal = !isInternal;
-      
-      // Debug - remove after testing
-      console.log("Link debug:", { href, isInternal, isExternal });
 
       return (
         <a

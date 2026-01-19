@@ -46,13 +46,13 @@ const personalNavItems: NavItem[] = [
 
 export function CollapsibleSidebar() {
   const pathname = usePathname();
-  const { isOpen, toggle, close, hasInteracted } = useSidebar();
+  const { isOpen, toggle, close, hasMounted } = useSidebar();
   const { theme, toggleTheme } = useTheme();
 
   return (
     <>
-      {/* Backdrop overlay on mobile only - only show after user has interacted */}
-      {hasInteracted && isOpen && (
+      {/* Backdrop overlay on mobile only */}
+      {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm sm:hidden"
           onClick={close}
@@ -73,13 +73,15 @@ export function CollapsibleSidebar() {
           rounded-2xl sm:rounded-none
           shadow-xl sm:shadow-none
         `,
-          // Only animate after user has interacted
-          hasInteracted && "transition-[width,transform] duration-200 ease-in-out",
-          // CSS-based initial state: closed on mobile, open on desktop
-          // After interaction, JS state takes over
-          hasInteracted
-            ? (isOpen ? "w-56" : "w-0")
-            : "w-0 sm:w-56"
+          // Only animate after mount to prevent flash
+          hasMounted && "transition-[width,transform] duration-200 ease-in-out",
+          // Before mount: use CSS to show correct initial state (open on desktop, closed on mobile)
+          // After mount: use JS isOpen state
+          !hasMounted
+            ? "w-0 sm:w-56" // CSS-only initial state
+            : isOpen
+              ? "w-56"
+              : "w-0"
         )}
       >
         <div className="flex flex-col h-full sm:h-dvh w-56 p-0 sm:py-4 sm:pl-4">
