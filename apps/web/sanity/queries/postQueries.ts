@@ -12,7 +12,13 @@ export const POSTS_QUERY = defineQuery(`*[
   slug,
   publishedAt,
   image,
-  body,
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->
+    }
+  },
   tags[]->{
     _id,
     name,
@@ -32,7 +38,13 @@ export const POST_BY_SLUG_QUERY = defineQuery(`*[
   slug,
   publishedAt,
   image,
-  body,
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->
+    }
+  },
   tags[]->{
     _id,
     name,

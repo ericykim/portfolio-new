@@ -1,8 +1,47 @@
 import React from "react";
+import Image from "next/image";
+import { urlFor } from "@/utils/sanityImage";
+
+interface PortableTextImageValue {
+  asset?: {
+    _ref: string;
+  };
+  alt?: string;
+  caption?: string;
+}
 
 export const portableTextComponents = {
   // Handle soft breaks (Shift+Enter) as <br> tags
   hardBreak: () => <br />,
+
+  // Handle images in portable text
+  types: {
+    image: ({ value }: { value: PortableTextImageValue }) => {
+      if (!value?.asset?._ref) {
+        return null;
+      }
+
+      return (
+        <figure className="my-8">
+          <div className="relative w-full overflow-hidden rounded-lg">
+            <Image
+              src={urlFor(value).width(1200).auto("format").url()}
+              alt={value.alt || ""}
+              width={1200}
+              height={800}
+              className="w-full h-auto object-contain"
+              sizes="(max-width: 768px) 100vw, 800px"
+            />
+          </div>
+          {value.caption && (
+            <figcaption className="mt-2 text-center text-sm text-neutral-500 dark:text-neutral-400">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+  },
 
   // Render blocks (paragraphs) with proper line break handling
   block: {
