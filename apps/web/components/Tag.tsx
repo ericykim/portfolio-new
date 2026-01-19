@@ -20,9 +20,9 @@ const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> =
       border: "border-purple-500 dark:border-purple-400",
     },
     dev: {
-      bg: "bg-blue-100 dark:bg-blue-950",
-      text: "text-blue-700 dark:text-blue-300",
-      border: "border-blue-500 dark:border-blue-400",
+      bg: "bg-green-100 dark:bg-green-950",
+      text: "text-green-700 dark:text-green-300",
+      border: "border-green-500 dark:border-green-400",
     },
     list: {
       bg: "bg-amber-100 dark:bg-amber-950",
