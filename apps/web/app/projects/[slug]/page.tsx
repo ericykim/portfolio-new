@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
 import { PROJECT_BY_SLUG_QUERY } from "@/sanity/queries";
+import { portableTextComponents } from "@/components/PortableTextComponents";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -52,7 +53,9 @@ export default async function ProjectPage({
         <p className="text-neutral-600 dark:text-neutral-400">
           Published: {new Date(project.publishedAt).toLocaleDateString()}
         </p>
-        {Array.isArray(project.body) && <PortableText value={project.body} />}
+        {Array.isArray(project.body) && (
+          <PortableText value={project.body} components={portableTextComponents} />
+        )}
       </div>
     </div>
   );

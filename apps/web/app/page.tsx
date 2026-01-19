@@ -2,6 +2,7 @@ import { client } from "@/sanity/client";
 import { HOME_PAGE_QUERY } from "@/sanity/queries";
 import { PortableText, PortableTextBlock } from "next-sanity";
 import Image from "next/image";
+import { portableTextComponents } from "@/components/PortableTextComponents";
 
 interface WorkExperience {
   _id: string;
@@ -75,7 +76,7 @@ export default async function IndexPage() {
               about me
             </h2>
             <div className="prose prose-neutral dark:prose-invert max-w-none">
-              <PortableText value={data.profile.bio} />
+              <PortableText value={data.profile.bio} components={portableTextComponents} />
             </div>
           </section>
         )}

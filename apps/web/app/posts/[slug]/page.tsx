@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
 import { POST_BY_SLUG_QUERY } from "@/sanity/queries";
+import { portableTextComponents } from "@/components/PortableTextComponents";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -48,11 +49,13 @@ export default async function PostPage({
         />
       )}
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-      <div className="prose dark:prose-invert max-w-none">
+      <div className="prose dark:prose-invert max-w-none whitespace-pre-line">
         <p className="text-neutral-600 dark:text-neutral-400">
           Published: {new Date(post.publishedAt).toLocaleDateString()}
         </p>
-        {Array.isArray(post.body) && <PortableText value={post.body} />}
+        {Array.isArray(post.body) && (
+          <PortableText value={post.body} components={portableTextComponents} />
+        )}
       </div>
     </div>
   );
