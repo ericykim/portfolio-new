@@ -32,7 +32,7 @@ export default async function PostPage({
     : null;
 
   return (
-    <div className="container mx-auto max-w-3xl p-8 flex flex-col gap-4">
+    <div className="container mx-auto max-w-3xl p-8 flex flex-col">
       <Link
         href="/posts"
         className="hover:underline text-neutral-600 dark:text-neutral-400 sm:hidden"
@@ -48,9 +48,9 @@ export default async function PostPage({
           height={310}
         />
       )}
-      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+      <h1 className="text-4xl font-bold">{post.title}</h1>
       <div className="prose dark:prose-invert max-w-none whitespace-pre-line">
-        <p className="text-neutral-600 dark:text-neutral-400">
+        <p className="text-neutral-600 dark:text-neutral-400 mb-4">
           Published: {new Date(post.publishedAt).toLocaleDateString()}
         </p>
         {Array.isArray(post.body) && (

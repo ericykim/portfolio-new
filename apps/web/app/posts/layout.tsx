@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
 import { type ContentListItem } from "@/components/ContentList";
@@ -27,8 +28,10 @@ export default async function PostLayout({
   }
 
   return (
-    <ContentLayoutWrapper items={posts} basePath="/posts" allTags={tags}>
-      {children}
-    </ContentLayoutWrapper>
+    <Suspense fallback={<div className="p-8">Loading...</div>}>
+      <ContentLayoutWrapper items={posts} basePath="/posts" allTags={tags}>
+        {children}
+      </ContentLayoutWrapper>
+    </Suspense>
   );
 }

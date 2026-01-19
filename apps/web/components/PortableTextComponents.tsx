@@ -1,11 +1,13 @@
-import type { PortableTextComponents } from "next-sanity";
+import React from "react";
 
-export const portableTextComponents: PortableTextComponents = {
+export const portableTextComponents = {
   // Handle soft breaks (Shift+Enter) as <br> tags
   hardBreak: () => <br />,
   
   // Render blocks (paragraphs) with proper line break handling
   block: {
-    normal: ({ children }) => <p className="mb-4">{children}</p>,
+    normal: ({ children }: { children?: React.ReactNode }) => (
+      <p className="mb-4">{children}</p>
+    ),
   },
 };
