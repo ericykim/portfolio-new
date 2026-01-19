@@ -35,7 +35,27 @@ export const postType = defineType({
     defineField({
       name: 'body',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        {type: 'block'},
+        defineArrayMember({
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              description: 'Describes the image for screen readers and SEO',
+            }),
+            defineField({
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+              description: 'Optional caption shown below the image',
+            }),
+          ],
+        }),
+      ],
     }),
   ],
 })
