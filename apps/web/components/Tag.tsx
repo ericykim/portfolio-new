@@ -8,6 +8,9 @@ export interface Tag {
   slug: { current: string };
 }
 
+// Tags to hide from display
+const HIDDEN_TAGS = ["sports", "list", "travel"];
+
 // Tag color mapping with Tailwind colors
 const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> =
   {
@@ -66,6 +69,11 @@ const TAG_COLORS: Record<string, { bg: string; text: string; border: string }> =
       text: "text-gray-700 dark:text-gray-300",
       border: "border-gray-500 dark:border-gray-400",
     },
+    "case-study": {
+      bg: "bg-blue-100 dark:bg-blue-950",
+      text: "text-blue-700 dark:text-blue-300",
+      border: "border-blue-500 dark:border-blue-400",
+    },
   };
 
 interface TagProps {
@@ -77,6 +85,11 @@ interface TagProps {
 }
 
 export function Tag({ slug, name, isSelected, onRemove, onClick }: TagProps) {
+  // Don't render hidden tags
+  if (HIDDEN_TAGS.includes(slug)) {
+    return null;
+  }
+
   const colors = TAG_COLORS[slug] || {
     bg: "bg-neutral-100 dark:bg-neutral-800",
     text: "text-neutral-700 dark:text-neutral-300",
